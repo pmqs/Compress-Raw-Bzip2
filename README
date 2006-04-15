@@ -1,9 +1,9 @@
 
                              Compress::Raw::Bzip2
 
-                             Version 2.000_09
+                             Version 2.000_11
 
-                                27 Feb 2006 
+                               10 April 2006
 
 
        Copyright (c) 2005-2006 Paul Marquess. All rights reserved.
@@ -29,7 +29,8 @@ DESCRIPTION
 -----------
 
 
-This module provides a Perl interface to the bzip2 compression library.  
+Compress-Raw-Bzip2 provides the interface to the bzip2 library for the modules
+IO::Compress::Bzip2 and IO::Compress::Bunzip2.
 
 
 
@@ -47,12 +48,6 @@ installed on your system:
     * Perl 5.004 or better. 
 
 
-
-By default, Compress::Raw::Bzip2 will build its own private copy of the 
-bzip2 library. If you want to use a different version of 
-bzip2, follow the instructions in the section called 
-"Controlling the version of bzip2 used by Compress::Raw::Bzip2" 
-later in this document.
 
 
 

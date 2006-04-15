@@ -31,7 +31,7 @@ this to read compressed files
     {
         ...
 
-and this to write compress files if you have the C<compress> program
+and this to write compress files, if you have the C<compress> program
 available
 
     open F, "| compress -c $filename ";
@@ -109,6 +109,11 @@ C<Archive::Zip> module. You can find it on CPAN at
 
 
 
+
+
+
+
+
 =head1 SEE ALSO
 
 L<Compress::Zlib>, L<IO::Compress::Gzip>, L<IO::Uncompress::Gunzip>, L<IO::Compress::Deflate>, L<IO::Uncompress::Inflate>, L<IO::Compress::RawDeflate>, L<IO::Uncompress::RawInflate>, L<IO::Compress::Bzip2>, L<IO::Uncompress::Bunzip2>, L<IO::Compress::Lzop>, L<IO::Uncompress::UnLzop>, L<IO::Uncompress::AnyInflate>, L<IO::Uncompress::AnyUncompress>
@@ -118,9 +123,6 @@ L<Compress::Zlib::FAQ|Compress::Zlib::FAQ>
 L<File::GlobMapper|File::GlobMapper>, L<Archive::Zip|Archive::Zip>,
 L<Archive::Tar|Archive::Tar>,
 L<IO::Zlib|IO::Zlib>
-
-
-
 
 
 

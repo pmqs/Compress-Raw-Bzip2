@@ -12,7 +12,7 @@ use Carp ;
 use bytes ;
 our ($VERSION, $XS_VERSION, @ISA, @EXPORT, $AUTOLOAD);
 
-$VERSION = '2.000_05';
+$VERSION = '2.000_11';
 $XS_VERSION = $VERSION; 
 $VERSION = eval $VERSION;
 
@@ -96,9 +96,10 @@ package Compress::Raw::Bzip2;
 
 __END__
 
+
 =head1 NAME
 
-Compress::Raw::Bzip2 - Interface to bzip2 compression library
+Compress::Raw::Bzip2 - Low-Level Interface to bzip2 compression library
 
 =head1 SYNOPSIS
 
@@ -106,12 +107,15 @@ Compress::Raw::Bzip2 - Interface to bzip2 compression library
 
 =head1 DESCRIPTION
 
-xxx
+C<Compress::Raw::Bzip2> provides the interface to the bzip2 library for the
+modules C<IO::Compress::Bzip2> and C<IO::Compress::Bunzip2>.
 
-    
+More documentation to follow.
+
+
 =head1 SEE ALSO
 
-L<IO::Compress::Gzip>, L<IO::Uncompress::Gunzip>, L<IO::Compress::Deflate>, L<IO::Uncompress::Inflate>, L<IO::Compress::RawDeflate>, L<IO::Uncompress::RawInflate>, L<IO::Compress::Bzip2>, L<IO::Uncompress::Bunzip2>, L<IO::Compress::Lzop>, L<IO::Uncompress::UnLzop>, L<IO::Uncompress::AnyInflate>, L<IO::Uncompress::AnyUncompress>
+L<Compress::Zlib>, L<IO::Compress::Gzip>, L<IO::Uncompress::Gunzip>, L<IO::Compress::Deflate>, L<IO::Uncompress::Inflate>, L<IO::Compress::RawDeflate>, L<IO::Uncompress::RawInflate>, L<IO::Compress::Bzip2>, L<IO::Uncompress::Bunzip2>, L<IO::Compress::Lzop>, L<IO::Uncompress::UnLzop>, L<IO::Uncompress::AnyInflate>, L<IO::Uncompress::AnyUncompress>
 
 L<Compress::Zlib::FAQ|Compress::Zlib::FAQ>
 
@@ -120,37 +124,24 @@ L<Archive::Tar|Archive::Tar>,
 L<IO::Zlib|IO::Zlib>
 
 
-For RFC 1950, 1951 and 1952 see
-F<http://www.faqs.org/rfcs/rfc1950.html>,
-F<http://www.faqs.org/rfcs/rfc1951.html> and
-F<http://www.faqs.org/rfcs/rfc1952.html>
 
-The I<zlib> compression library was written by Jean-loup Gailly
-F<gzip@prep.ai.mit.edu> and Mark Adler F<madler@alumni.caltech.edu>.
+The primary site for the bzip2 program is F<http://www.bzip.org>.
 
-The primary site for the I<zlib> compression library is
-F<http://www.zlib.org>.
-
-The primary site for gzip is F<http://www.gzip.org>.
-
-
-
-
+See the module L<Compress::Bzip2|Compress::Bzip2>
 
 
 
 =head1 AUTHOR
 
-The I<Compress::Zlib> module was written by Paul Marquess,
-F<pmqs@cpan.org>. The latest copy of the module can be
-found on CPAN in F<modules/by-module/Compress/Compress-Zlib-x.x.tar.gz>.
+This module was written by Paul Marquess, F<pmqs@cpan.org>. 
+
+
 
 =head1 MODIFICATION HISTORY
 
 See the Changes file.
 
 =head1 COPYRIGHT AND LICENSE
-
 
 Copyright (c) 2005-2006 Paul Marquess. All rights reserved.
 
