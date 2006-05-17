@@ -1,6 +1,10 @@
 CHANGES
 -------
 
+  2.000_12 12 May 2006
+
+      * Documentation updates.
+
   2.000_10 13 March 2006
 
       * Created Compress::Raw::Bzip2

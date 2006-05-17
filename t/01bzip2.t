@@ -80,7 +80,7 @@ my $len   = length $hello ;
     title "Error Cases" ;
 
     eval { new Compress::Raw::Bzip2(1,2,3,4,5,6) };
-    like $@,  mkErr "Usage: Compress::Raw::Bzip2::_new(appendOut=1, consume=1, blockSize100k=1, workfactor=0, verbosity=0)";
+    like $@,  mkErr "Usage: Compress::Raw::Bzip2::_new(appendOut=1, blockSize100k=1, workfactor=0, verbosity=0)";
 
 }
 
@@ -94,7 +94,7 @@ my $len   = length $hello ;
     my @hello = split('', $hello) ;
     my ($err, $x, $X, $status); 
  
-    ok( ($x, $err) = new Compress::Raw::Bzip2(0, 0), "Create bzdeflate object" );
+    ok( ($x, $err) = new Compress::Raw::Bzip2(0), "Create bzdeflate object" );
     ok $x, "Compress::Raw::Bzip2 ok" ;
     cmp_ok $err, '==', BZ_OK, "status is BZ_OK" ;
  
@@ -157,7 +157,7 @@ my $len   = length $hello ;
 
     my $hello = 6529 ;
  
-    ok  my ($x, $err) = new Compress::Raw::Bzip2 (1, 0) ;
+    ok  my ($x, $err) = new Compress::Raw::Bzip2 (1) ;
     ok $x ;
     cmp_ok $err, '==', BZ_OK ;
  
@@ -200,7 +200,7 @@ my $len   = length $hello ;
     my $hello = "I am a HAL 9000 computer" ;
     my @hello = split('', $hello) ;
      
-    ok  my ($x, $err) = new Compress::Raw::Bzip2 (1, 0) ;
+    ok  my ($x, $err) = new Compress::Raw::Bzip2 (1) ;
     ok $x ;
     cmp_ok $err, '==', BZ_OK ;
      
@@ -248,7 +248,7 @@ my $len   = length $hello ;
       { $contents .= chr int rand 255 }
     
     
-    ok my ($x, $err) = new Compress::Raw::Bzip2(0, 0) ;
+    ok my ($x, $err) = new Compress::Raw::Bzip2(0) ;
     ok $x ;
     cmp_ok $err, '==', BZ_OK ;
      
@@ -304,7 +304,7 @@ for my $consume ( 0 .. 1)
 {
     title "bzinflate - check remaining buffer after BZ_STREAM_END, Consume $consume";
 
-    ok my $x = new Compress::Raw::Bzip2(0, 0) ;
+    ok my $x = new Compress::Raw::Bzip2(0) ;
  
     my ($X, $Y, $Z);
     cmp_ok $x->bzdeflate($hello, $X), '==', BZ_RUN_OK;
@@ -359,7 +359,7 @@ foreach (1 .. 2)
     my $contents = '' ;
     foreach (1 .. 5000)
       { $contents .= chr int rand 255 }
-    ok  my $x = new Compress::Raw::Bzip2(1, 0) ;
+    ok  my $x = new Compress::Raw::Bzip2(1) ;
      
     my $X ;
     my $status = $x->bzdeflate(substr($contents,0), $X);
@@ -393,7 +393,7 @@ foreach (1 .. 2)
     my @hello = split('', $hello) ;
     my ($err, $x, $X, $status); 
  
-    ok( ($x, $err) = new Compress::Raw::Bzip2 (0, 0) );
+    ok( ($x, $err) = new Compress::Raw::Bzip2 (0) );
     ok $x ;
     cmp_ok $err, '==', BZ_OK ;
  
@@ -442,7 +442,7 @@ if ($] >= 5.005)
 
     my($X, $Z);
 
-    ok my $x = new Compress::Raw::Bzip2 (1, 0 );
+    ok my $x = new Compress::Raw::Bzip2 (1);
 
     cmp_ok $x->bzdeflate($data, $X), '==',  BZ_RUN_OK ;
 
@@ -482,7 +482,7 @@ foreach (1 .. 2)
     my @hello = split('', $hello) ;
     my ($err, $x, $X, $status); 
  
-    ok( ($x, $err) = new Compress::Raw::Bzip2 (1, 0 ) );
+    ok( ($x, $err) = new Compress::Raw::Bzip2 (1) );
     ok $x ;
     cmp_ok $err, '==', BZ_OK ;
  
@@ -528,7 +528,7 @@ foreach (1 .. 2)
     my @hello = split('', $hello) ;
     my ($err, $x, $X, $status); 
  
-    ok( ($x, $err) = new Compress::Raw::Bzip2 (1, 0 ) );
+    ok( ($x, $err) = new Compress::Raw::Bzip2 (1) );
     ok $x ;
     cmp_ok $err, '==', BZ_OK ;
  

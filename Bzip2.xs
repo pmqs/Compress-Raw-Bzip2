@@ -355,9 +355,8 @@ const char *
 bzlibversion()
 
 void
-_new(appendOut=1, consume=1, blockSize100k=1, workfactor=0, verbosity=0)
+_new(appendOut=1, blockSize100k=1, workfactor=0, verbosity=0)
     int appendOut
-    int consume
     int	blockSize100k
     int workfactor
     int verbosity
@@ -385,8 +384,6 @@ _new(appendOut=1, consume=1, blockSize100k=1, workfactor=0, verbosity=0)
             int flags = 0 ;
             if (appendOut)
                 flags |= FLAG_APPEND_OUTPUT;
-            if (consume)
-                flags |= FLAG_CONSUME_INPUT;
             PostInitStream(s, appendOut ? FLAG_APPEND_OUTPUT :0) ;
         
         }
