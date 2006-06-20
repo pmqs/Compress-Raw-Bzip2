@@ -12,7 +12,7 @@ use Carp ;
 use bytes ;
 our ($VERSION, $XS_VERSION, @ISA, @EXPORT, $AUTOLOAD);
 
-$VERSION = '2.000_12';
+$VERSION = '2.000_13';
 $XS_VERSION = $VERSION; 
 $VERSION = eval $VERSION;
 
@@ -147,14 +147,14 @@ Below is a list of the valid options:
 
 =over 5
 
-=item $appendOutput
+=item B<$appendOutput>
 
 Controls whether the compressed data is appended to the output buffer in
 the C<bzdeflate>, C<bzflush> and C<bzclose> methods.
 
 Defaults to 1.
 
-=item $blockSize100k
+=item B<$blockSize100k>
 
 To quote the bzip2 documentation
 
@@ -165,7 +165,7 @@ To quote the bzip2 documentation
 
 Defaults to 1.
 
-=item $workfactor
+=item B<$workfactor>
 
 To quote the bzip2 documentation
 
@@ -196,7 +196,7 @@ Defaults to 0.
 =head2 $status = $bz->bzdeflate($input, $output);
 
 Reads the contents of C<$input>, compresses it and writes the compressed
-data to C<$append>.
+data to C<$output>.
 
 Returns C<BZ_RUN_OK> on success and a C<bzip2> error code on failure.
 
@@ -213,7 +213,7 @@ Returns C<BZ_RUN_OK> on success and a C<bzip2> error code on failure.
 =head2 $status = $bz->bzclose($output);
 
 Terminates the compressed data stream and flushes any pending compressed
-data to C<$input>.
+data to C<$output>.
 
 Returns C<BZ_STREAM_END> on success and a C<bzip2> error code on failure.
 
@@ -235,16 +235,16 @@ Below is a list of the valid options:
 
 =over 5
 
-=item $appendOutput
+=item B<$appendOutput>
 
 Controls whether the compressed data is appended to the output buffer in the
 C<bzinflate>, C<bzflush> and C<bzclose> methods.
 
 Defaults to 1.
 
-=item $consumeInput
+=item B<$consumeInput>
 
-=item $small
+=item B<$small>
 
 To quote the bzip2 documentation
 
