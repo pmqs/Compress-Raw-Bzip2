@@ -9,6 +9,9 @@ private/MakeUtil.pm
 ppport.h
 t/01bzip2.t
 t/99pod.t
+t/Test/Builder.pm
+t/Test/More.pm
+t/Test/Simple.pm
 t/compress/CompTestUtils.pm
 lib/Compress/Raw/Bzip2.pm
 bzip2-src/blocksort.c
@@ -28,4 +31,3 @@ bzip2-src/spewG.c
 bzip2-src/mk251.c
 Changes
 pod/FAQ.pod
-META.yml                                 Module meta-data (added by MakeMaker)

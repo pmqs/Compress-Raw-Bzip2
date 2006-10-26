@@ -50,7 +50,6 @@ typedef struct di_stream {
 #define FLAG_CONSUME_INPUT      8
     bz_stream stream;
     uInt     bufsize; 
-    uInt     bufinc; 
     int      last_error ;
     uLong    bytesInflated ;
     uLong    compressedBytes ;
@@ -241,7 +240,7 @@ PostInitStream(s, flags)
     int flags ;
 #endif
 {
-    s->bufinc  = 1024 * 16 ;
+    s->bufsize  = 1024 * 16 ;
     s->last_error = 0 ;
     s->flags    = flags ;
 }
@@ -460,7 +459,9 @@ bzdeflate (s, buf, output)
     uInt	cur_length = NO_INIT
     uInt	increment = NO_INIT
     int		RETVAL = 0;
+    uInt   bufinc = NO_INIT
   CODE:
+    bufinc = s->bufsize;
 
     /* If the input buffer is a reference, dereference it */
     buf = deRef(buf, "deflate") ;
@@ -492,12 +493,12 @@ bzdeflate (s, buf, output)
 
         if (s->stream.avail_out == 0) {
 	    /* out of space in the output buffer so make it bigger */
-            Sv_Grow(output, SvLEN(output) + s->bufinc) ;
+            Sv_Grow(output, SvLEN(output) + bufinc) ;
             cur_length += increment ;
             s->stream.next_out = (char*) SvPVbyte_nolen(output) + cur_length ;
-            increment = s->bufinc ;
+            increment = bufinc ;
             s->stream.avail_out = increment;
-            s->bufinc *= 2 ;
+            bufinc *= 2 ;
         }
 
         RETVAL = BZ2_bzCompress(&(s->stream), BZ_RUN);
@@ -532,7 +533,9 @@ bzclose(s, output)
     SV * output 
     uInt	cur_length = NO_INIT
     uInt	increment = NO_INIT
+    uInt    bufinc = NO_INIT
   CODE:
+    bufinc = s->bufsize;
   
     s->stream.avail_in = 0; /* should be zero already anyway */
   
@@ -554,12 +557,12 @@ bzclose(s, output)
     for (;;) {
         if (s->stream.avail_out == 0) {
 	    /* consumed all the available output, so extend it */
-            Sv_Grow(output, SvLEN(output) + s->bufinc) ;
+            Sv_Grow(output, SvLEN(output) + bufinc) ;
             cur_length += increment ;
             s->stream.next_out = (char*) SvPVbyte_nolen(output) + cur_length ;
-            increment = s->bufinc ;
+            increment = bufinc ;
             s->stream.avail_out = increment;
-            s->bufinc *= 2 ;
+            bufinc *= 2 ;
         }
         RETVAL = BZ2_bzCompress(&(s->stream), BZ_FINISH);
     
@@ -591,7 +594,9 @@ bzflush(s, output)
     SV * output 
     uInt	cur_length = NO_INIT
     uInt	increment = NO_INIT
+    uInt    bufinc = NO_INIT
   CODE:
+    bufinc = s->bufsize;
   
     s->stream.avail_in = 0; /* should be zero already anyway */
   
@@ -613,12 +618,12 @@ bzflush(s, output)
     for (;;) {
         if (s->stream.avail_out == 0) {
 	    /* consumed all the available output, so extend it */
-            Sv_Grow(output, SvLEN(output) + s->bufinc) ;
+            Sv_Grow(output, SvLEN(output) + bufinc) ;
             cur_length += increment ;
             s->stream.next_out = (char*) SvPVbyte_nolen(output) + cur_length ;
-            increment = s->bufinc ;
+            increment = bufinc ;
             s->stream.avail_out = increment;
-            s->bufinc *= 2 ;
+            bufinc *= 2 ;
         }
         RETVAL = BZ2_bzCompress(&(s->stream), BZ_FLUSH);
     
@@ -694,11 +699,13 @@ bzinflate (s, buf, output)
     uInt	prefix_length = 0;
     uInt	increment = 0;
     STRLEN  stmp   = NO_INIT
+    uInt    bufinc = NO_INIT
   PREINIT:
 #ifdef UTF8_AVAILABLE    
     bool	out_utf8  = FALSE;
 #endif    
   CODE:
+    bufinc = s->bufsize;
     /* If the buffer is a reference, dereference it */
     buf = deRef(buf, "inflate") ;
 
@@ -739,12 +746,12 @@ bzinflate (s, buf, output)
 
         if (s->stream.avail_out == 0) {
 	    /* out of space in the output buffer so make it bigger */
-            Sv_Grow(output, SvLEN(output) + s->bufinc) ;
+            Sv_Grow(output, SvLEN(output) + bufinc) ;
             cur_length += increment ;
             s->stream.next_out = (char*) SvPVbyte_nolen(output) + cur_length ;
-            increment = s->bufinc ;
+            increment = bufinc ;
             s->stream.avail_out = increment;
-            s->bufinc *= 2 ;
+            bufinc *= 2 ;
         }
 
         RETVAL = BZ2_bzDecompress (&(s->stream));

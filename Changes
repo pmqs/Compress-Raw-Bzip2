@@ -1,6 +1,10 @@
 CHANGES
 -------
 
+  2.000_14 3 July 2006
+
+      * Fixed memory leak on realloc.
+
   2.000_12 12 May 2006
 
       * Documentation updates.
