@@ -31,3 +31,4 @@ bzip2-src/spewG.c
 bzip2-src/mk251.c
 Changes
 pod/FAQ.pod
+META.yml                                 Module meta-data (added by MakeMaker)
