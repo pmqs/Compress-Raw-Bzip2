@@ -7,6 +7,7 @@ fallback/constants.xs
 MANIFEST
 private/MakeUtil.pm
 ppport.h
+t/000prereq.t
 t/01bzip2.t
 t/99pod.t
 t/Test/Builder.pm
