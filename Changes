@@ -1,6 +1,12 @@
 CHANGES
 -------
 
+  2.004 3 March 2007
+
+      * Updated to use bzip2 1.0.4
+
+      * Remove redundant code from Bzip2.xs
+
   2.003 2 January 2007
 
       * Added explicit version checking

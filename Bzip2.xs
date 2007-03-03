@@ -3,7 +3,7 @@
  * Created : 5th October 2005
  * Version : 2.000
  *
- *   Copyright (c) 2005 Paul Marquess. All rights reserved.
+ *   Copyright (c) 2005-2007 Paul Marquess. All rights reserved.
  *   This program is free software; you can redistribute it and/or
  *   modify it under the same terms as Perl itself.
  *
@@ -65,8 +65,6 @@ typedef di_stream * Compress__Raw__Bunzip2 ;
 
 #define COMPRESS_CLASS    "Compress::Raw::Bzip2"
 #define UNCOMPRESS_CLASS  "Compress::Raw::Bunzip2"
-
-#define BZERRNO "Compress::Raw::Bzip2::bzerrno"
 
 #define ZMALLOC(to, typ) ((to = (typ *)safemalloc(sizeof(typ))), \
                                 Zero(to,1,typ))
@@ -337,15 +335,6 @@ BOOT:
     if (BZ2_bzlibVersion()[0] != '1')
 	croak(COMPRESS_CLASS " needs bzip2 version 1.x, you have %s\n", BZ2_bzlibVersion()) ;
 	
-    {
-        /* Create the $gzerror scalar */
-        SV * gzerror_sv = perl_get_sv(BZERRNO, GV_ADDMULTI) ;
-        sv_setiv(gzerror_sv, 0) ;
-        sv_setpv(gzerror_sv, "") ;
-        SvIOK_on(gzerror_sv) ;
-    }
-
-
 
 MODULE = Compress::Raw::Bzip2 PACKAGE = Compress::Raw::Bzip2
 
@@ -513,10 +502,10 @@ bzdeflate (s, buf, output)
     if (RETVAL == BZ_RUN_OK) {
         SvPOK_only(output);
         SvCUR_set(output, cur_length + increment - s->stream.avail_out) ;
+        SvSETMAGIC(output);
     }
     OUTPUT:
 	RETVAL
-	output
   
 
 void
@@ -582,10 +571,10 @@ bzclose(s, output)
     if (RETVAL == BZ_STREAM_END) {
         SvPOK_only(output);
         SvCUR_set(output, cur_length + increment - s->stream.avail_out) ;
+        SvSETMAGIC(output);
     }
     OUTPUT:
 	RETVAL
-	output
 
 
 DualType
@@ -645,10 +634,10 @@ bzflush(s, output)
     if (RETVAL == BZ_RUN_OK) {
         SvPOK_only(output);
         SvCUR_set(output, cur_length + increment - s->stream.avail_out) ;
+        SvSETMAGIC(output);
     }
     OUTPUT:
 	RETVAL
-	output
 
 uLong
 total_in_lo32(s)
@@ -784,6 +773,7 @@ bzinflate (s, buf, output)
         if (out_utf8)
             sv_utf8_upgrade(output);
 #endif        
+        SvSETMAGIC(output);
 
 	/* fix the input buffer */
 	if (s->flags & FLAG_CONSUME_INPUT) {
@@ -797,8 +787,6 @@ bzinflate (s, buf, output)
     }
     OUTPUT:
 	RETVAL
-	buf
-	output
 
 uLong
 inflateCount(s)
