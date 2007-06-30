@@ -9,8 +9,9 @@ use ExtUtils::MakeMaker 5.16 ;
 my $WALL= '';
 $WALL = ' -Wall -Wno-comment ' if $Config{'cc'} =~ /gcc/ ;
 
-my $BZIP2_LIB = 'bzip2-src';
-my $BZIP2_INCLUDE = '.';
+my $BUILD_BZIP2 = defined($ENV{BUILD_BZIP2}) ? $ENV{BUILD_BZIP2} : 1;
+my $BZIP2_LIB = defined($ENV{BZIP2_LIB}) ? $ENV{BZIP2_LIB} : 'bzip2-src';
+my $BZIP2_INCLUDE = defined($ENV{BZIP2_INCLUDE}) ? $ENV{BZIP2_INCLUDE} : '.';
 
 #ParseCONFIG() ;
 
@@ -38,13 +39,11 @@ WriteMakefile(
     ),
        
 
-    bzip2_files($BZIP2_LIB),
-
-#    (
-#      $BUILD_BZIP2
-#        ? bzip2_files($ZLIB_LIB)
-#        : (LIBS => [ "-L$BZIP2_LIB -lbz2 " ])
-#    ),
+    (
+      $BUILD_BZIP2
+        ? bzip2_files($BZIP2_LIB)
+        : (LIBS => [ "-L$BZIP2_LIB -lbz2 " ])
+    ),
       
     (
       $] >= 5.005

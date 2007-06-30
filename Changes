@@ -1,6 +1,12 @@
 CHANGES
 -------
 
+  2.005 18 June 2007
+
+      * Added patch from Fedora to allow the module to be built with an
+        existing bzip2 library.
+        [rt.cpan.org #25489]
+
   2.004 3 March 2007
 
       * Updated to use bzip2 1.0.4
