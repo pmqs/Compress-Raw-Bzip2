@@ -343,7 +343,8 @@ const char *
 bzlibversion()
 
 void
-_new(appendOut=1, blockSize100k=1, workfactor=0, verbosity=0)
+new(class, appendOut=1, blockSize100k=1, workfactor=0, verbosity=0)
+    const char * class
     int appendOut
     int	blockSize100k
     int workfactor
@@ -353,9 +354,9 @@ _new(appendOut=1, blockSize100k=1, workfactor=0, verbosity=0)
     int err ;
     deflateStream s ;
 #if 0
-    if (trace)
-        warn("in _deflateInit(level=%d, method=%d, windowBits=%d, memLevel=%d, strategy=%d, bufsize=%ld\n",
-	level, method, windowBits, memLevel, strategy, bufsize) ;
+    /* if (trace) */
+        warn("in Compress::Raw::Bzip2::_new(items=%d,appendOut=%d, blockSize100k=%d, workfactor=%d, verbosity=%d\n",
+	items, appendOut, blockSize100k, workfactor, verbosity);
 #endif
     if ((s = InitStream() )) {
 
@@ -373,13 +374,20 @@ _new(appendOut=1, blockSize100k=1, workfactor=0, verbosity=0)
             if (appendOut)
                 flags |= FLAG_APPEND_OUTPUT;
             PostInitStream(s, appendOut ? FLAG_APPEND_OUTPUT :0) ;
-        
         }
     }
     else
         err = BZ_MEM_ERROR ;
 
-    XPUSHs(sv_2mortal(newSViv(PTR2IV(s)))) ;
+    {
+        SV* obj = sv_setref_pv(sv_newmortal(), class, (void*)s);
+        XPUSHs(obj);
+    }
+    if(0)
+    {
+        SV* obj = sv_2mortal(newSViv(PTR2IV(s))) ;
+        XPUSHs(obj);
+    }
     if (GIMME == G_ARRAY) {
         SV * sv = sv_2mortal(newSViv(err)) ;
 	setDUALstatus(sv, err);
@@ -390,7 +398,8 @@ _new(appendOut=1, blockSize100k=1, workfactor=0, verbosity=0)
 MODULE = Compress::Raw::Bunzip2 PACKAGE = Compress::Raw::Bunzip2
 
 void
-_new(appendOut=1 , consume=1, small=0, verbosity=0)
+new(class, appendOut=1 , consume=1, small=0, verbosity=0)
+    const char* class
     int appendOut
     int consume
     int small
@@ -423,7 +432,15 @@ _new(appendOut=1 , consume=1, small=0, verbosity=0)
     else
 	err = BZ_MEM_ERROR ;
 
-    XPUSHs(sv_2mortal(newSViv(PTR2IV(s)))) ;
+    {
+        SV* obj = sv_setref_pv(sv_newmortal(), class, (void*)s);
+        XPUSHs(obj);
+    }
+       if (0)
+    {
+        SV* obj = sv_2mortal(newSViv(PTR2IV(s))) ;
+        XPUSHs(obj);
+    }
     if (GIMME == G_ARRAY) {
         SV * sv = sv_2mortal(newSViv(err)) ;
 	setDUALstatus(sv, err);
@@ -462,7 +479,7 @@ bzdeflate (s, buf, output)
 #endif         
     s->stream.next_in = (char*)SvPVbyte_nolen(buf) ;
     s->stream.avail_in = SvCUR(buf) ;
-    
+     
     /* and retrieve the output buffer */
     output = deRef_l(output, "deflate") ;
 #ifdef UTF8_AVAILABLE    
@@ -845,5 +862,4 @@ uncompressedBytes(s)
   OUTPUT:
 	RETVAL
 
-        
 MODULE = Compress::Raw::Bzip2 PACKAGE = Compress::Raw::Bzip2        PREFIX = Zip_

@@ -1,6 +1,11 @@
 CHANGES
 -------
 
+  2.006 1 September 2007
+
+      * Added the bzip2 LICENSE file into bzip2-src.
+        [rt.cpan.org #28980]
+
   2.005 18 June 2007
 
       * Added patch from Fedora to allow the module to be built with an

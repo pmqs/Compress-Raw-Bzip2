@@ -12,7 +12,7 @@ use Carp ;
 use bytes ;
 our ($VERSION, $XS_VERSION, @ISA, @EXPORT, $AUTOLOAD);
 
-$VERSION = '2.005';
+$VERSION = '2.006';
 $XS_VERSION = $VERSION; 
 $VERSION = eval $VERSION;
 
@@ -69,27 +69,27 @@ or do {
     bootstrap Compress::Raw::Bzip2 $XS_VERSION ; 
 };
 
-sub Compress::Raw::Bzip2::new
-{
-    my $class = shift ;
-    my ($ptr, $status) = _new(@_);
-    return wantarray ? (undef, $status) : undef
-        unless $ptr ;
-    my $obj = bless [$ptr], $class ;
-    return wantarray ? ($obj, $status) : $obj;
-}
-
-package Compress::Raw::Bunzip2 ;
-
-sub Compress::Raw::Bunzip2::new
-{
-    my $class = shift ;
-    my ($ptr, $status) = _new(@_);
-    return wantarray ? (undef, $status) : undef
-        unless $ptr ;
-    my $obj = bless [$ptr], $class ;
-    return wantarray ? ($obj, $status) : $obj;
-}
+#sub Compress::Raw::Bzip2::new
+#{
+#    my $class = shift ;
+#    my ($ptr, $status) = _new(@_);
+#    return wantarray ? (undef, $status) : undef
+#        unless $ptr ;
+#    my $obj = bless [$ptr], $class ;
+#    return wantarray ? ($obj, $status) : $obj;
+#}
+#
+#package Compress::Raw::Bunzip2 ;
+#
+#sub Compress::Raw::Bunzip2::new
+#{
+#    my $class = shift ;
+#    my ($ptr, $status) = _new(@_);
+#    return wantarray ? (undef, $status) : undef
+#        unless $ptr ;
+#    my $obj = bless [$ptr], $class ;
+#    return wantarray ? ($obj, $status) : $obj;
+#}
 
 package Compress::Raw::Bzip2;
 

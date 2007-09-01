@@ -30,6 +30,7 @@ bzip2-src/dlltest.c
 bzip2-src/unzcrash.c
 bzip2-src/spewG.c
 bzip2-src/mk251.c
+bzip2-src/LICENSE
 Changes
 pod/FAQ.pod
 META.yml                                 Module meta-data (added by MakeMaker)
