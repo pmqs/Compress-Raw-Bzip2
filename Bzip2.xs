@@ -70,7 +70,8 @@ typedef di_stream * Compress__Raw__Bunzip2 ;
                                 Zero(to,1,typ))
 
 
-static const char * const my_z_errmsg[] = {
+//static const char * const my_z_errmsg[] = {
+static const char my_z_errmsg[][32] = {
     "End of Stream",        /* BZ_STREAM_END        4       */
     "Finish OK",            /* BZ_FINISH_OK         3       */
     "Flush OK",             /* BZ_FLUSH_OK          2       */
@@ -246,7 +247,7 @@ PostInitStream(s, flags)
 
 static SV* 
 #ifdef CAN_PROTOTYPE
-deRef(SV * sv, char * string)
+deRef(SV * sv, const char * string)
 #else
 deRef(sv, string)
 SV * sv ;
@@ -278,7 +279,7 @@ char * string;
 
 static SV*
 #ifdef CAN_PROTOTYPE
-deRef_l(SV * sv, char * string)
+deRef_l(SV * sv, const char * string)
 #else
 deRef_l(sv, string)
 SV * sv ;

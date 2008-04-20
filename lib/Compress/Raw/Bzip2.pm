@@ -12,7 +12,7 @@ use Carp ;
 use bytes ;
 our ($VERSION, $XS_VERSION, @ISA, @EXPORT, $AUTOLOAD);
 
-$VERSION = '2.008';
+$VERSION = '2.009';
 $XS_VERSION = $VERSION; 
 $VERSION = eval $VERSION;
 
@@ -192,7 +192,6 @@ Defaults to 0.
 
 =back
 
-
 =head2 $status = $bz->bzdeflate($input, $output);
 
 Reads the contents of C<$input>, compresses it and writes the compressed
@@ -218,7 +217,6 @@ data to C<$output>.
 Returns C<BZ_STREAM_END> on success and a C<bzip2> error code on failure.
 
 =head2 Example
-
 
 =head1 Uncompression
 
@@ -300,8 +298,6 @@ The following bzip2 constants are exported by this module
 		BZ_OUTBUFF_FULL
 		BZ_CONFIG_ERROR
 
-
-
 =head1 SEE ALSO
 
 L<Compress::Zlib>, L<IO::Compress::Gzip>, L<IO::Uncompress::Gunzip>, L<IO::Compress::Deflate>, L<IO::Uncompress::Inflate>, L<IO::Compress::RawDeflate>, L<IO::Uncompress::RawInflate>, L<IO::Compress::Bzip2>, L<IO::Uncompress::Bunzip2>, L<IO::Compress::Lzop>, L<IO::Uncompress::UnLzop>, L<IO::Compress::Lzf>, L<IO::Uncompress::UnLzf>, L<IO::Uncompress::AnyInflate>, L<IO::Uncompress::AnyUncompress>
@@ -312,19 +308,13 @@ L<File::GlobMapper|File::GlobMapper>, L<Archive::Zip|Archive::Zip>,
 L<Archive::Tar|Archive::Tar>,
 L<IO::Zlib|IO::Zlib>
 
-
-
 The primary site for the bzip2 program is F<http://www.bzip.org>.
 
 See the module L<Compress::Bzip2|Compress::Bzip2>
 
-
-
 =head1 AUTHOR
 
 This module was written by Paul Marquess, F<pmqs@cpan.org>. 
-
-
 
 =head1 MODIFICATION HISTORY
 
@@ -332,10 +322,8 @@ See the Changes file.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2005-2007 Paul Marquess. All rights reserved.
+Copyright (c) 2005-2008 Paul Marquess. All rights reserved.
 
 This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
-
-
 

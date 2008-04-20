@@ -1,35 +1,26 @@
 
                              Compress-Raw-Bzip2
 
-                             Version 2.008
+                             Version 2.009
 
-                             2nd November 2007
+                              20th April 2008
 
-
-       Copyright (c) 2005-2007 Paul Marquess. All rights reserved.
+       Copyright (c) 2005-2008 Paul Marquess. All rights reserved.
           This program is free software; you can redistribute it
            and/or modify it under the same terms as Perl itself.
 
-
-
              The directory bzip2-src contains a subset of the 
-          source files copied directly from bzip2 version 1.0.4.
+          source files copied directly from bzip2 version 1.0.5.
            These files are Copyright(C) 1996-2007 Julian Seward.
     See the file bzip2-src/LICENSE for licence details for these files.
              Full source for the bzip2 library is available at
                            http://www.bzip.org/
 
-
 DESCRIPTION
 -----------
 
-
 Compress-Raw-Bzip2 provides the interface to the bzip2 library for the modules
 IO::Compress::Bzip2 and IO::Compress::Bunzip2.
-
-
-
-
 
 PREREQUISITES
 -------------
@@ -37,14 +28,9 @@ PREREQUISITES
 Before you can build Compress-Raw-Bzip2 you need to have the following
 installed on your system:
 
-
     * A C compiler
 
     * Perl 5.004 or better. 
-
-
-
-
 
 BUILDING THE MODULE
 -------------------
@@ -56,8 +42,6 @@ using this sequence of commands:
     make
     make test
 
-
-
 INSTALLATION
 ------------
 
@@ -65,18 +49,8 @@ To install Compress-Raw-Bzip2, run the command below:
 
     make install
 
-
-
-
-
 TROUBLESHOOTING
 ---------------
-
-
-
-
-
-
 
 Solaris build fails with "language optional software package not installed"
 ---------------------------------------------------------------------------
@@ -115,9 +89,6 @@ may vary.
 If that doesn't work for you, it's time to make changes to the Makefile
 by hand. Good luck!
 
-
-
-
 Solaris build fails with "gcc: unrecognized option `-KPIC'"
 -----------------------------------------------------------
 
@@ -155,11 +126,6 @@ I've had a report that when building Compress-Raw-Bzip2 under HP-UX that it
 is necessary to have first built the bzip2 library with the -fpic
 option.
 
-
-
-
-
-
 FEEDBACK
 --------
 
@@ -193,8 +159,7 @@ To help me help you, I need all of the following information:
         If you haven't installed Compress-Raw-Bzip2 then search Compress::Raw::Bzip2.pm
         for a line like this:
 
-          $VERSION = "2.008" ;
-
+          $VERSION = "2.009" ;
 
      c. The version of bzip2 you have used.
         If you have successfully installed Compress-Raw-Bzip2, this one-liner
@@ -202,9 +167,7 @@ To help me help you, I need all of the following information:
 
           perl -MCompress::Raw::Bzip2 -e "print q[bzip2 ver ]. Compress::Raw::Bzip2::ZLIB_VERSION.qq[\n]" 
 
-
         If not, look at the beginning of the file zlib.h. 
-
 
  2. If you are having problems building Compress-Raw-Bzip2, send me a
     complete log of what happened. Start by unpacking the Compress-Raw-Bzip2
@@ -214,6 +177,5 @@ To help me help you, I need all of the following information:
         perl Makefile.PL
         make
         make test TEST_VERBOSE=1          
-
 
 Paul Marquess <pmqs@cpan.org>
