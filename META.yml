@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Compress-Raw-Bzip2
-version:             2.010
+version:             2.011
 abstract:            Low-Level Interface to bzip2 compression library
 license:             perl
 author:              
