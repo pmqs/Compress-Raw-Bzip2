@@ -3,6 +3,8 @@
 use strict ;
 require 5.004 ;
 
+$::VERSION = '2.014' ;
+
 use private::MakeUtil;
 use ExtUtils::MakeMaker 5.16 ;
 
@@ -17,6 +19,19 @@ my $BZIP2_INCLUDE = defined($ENV{BZIP2_INCLUDE}) ? $ENV{BZIP2_INCLUDE} : '.';
 
 UpDowngrade(getPerlFiles('MANIFEST')) 
     unless $ENV{PERL_CORE};
+
+# Modules supplied by this distribution    
+my @myModules = qw( Compress::Raw::Bzip2);
+
+# Direct dependencies                  
+my @MainPREREQ = qw();
+
+# Get indirect dependencies that will break if we install this version
+push @MainPREREQ, FindBrokenDependencies($::VERSION, @myModules)
+    unless $ENV{PERL_CORE} ;
+
+my %MainPREREQ = map { $_ => $::VERSION } @MainPREREQ; 
+    
 
 WriteMakefile( 
     NAME         => 'Compress::Raw::Bzip2',
@@ -35,7 +50,7 @@ WriteMakefile(
     (
       $ENV{SKIP_FOR_CORE}
         ? (MAN3PODS    => {})
-        : ()
+        : (PREREQ_PM   => { %MainPREREQ })
     ),
        
 
