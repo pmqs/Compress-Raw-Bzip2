@@ -8,6 +8,8 @@ use ExtUtils::MakeMaker 5.16 ;
 
 my $WALL= '';
 $WALL = ' -Wall -Wno-comment ' if $Config{'cc'} =~ /gcc/ ;
+my $USE_PPPORT_H = ($ENV{PERL_CORE}) ? '' : '-DUSE_PPPORT_H';
+
 
 my $BUILD_BZIP2 = defined($ENV{BUILD_BZIP2}) ? $ENV{BUILD_BZIP2} : 1;
 my $BZIP2_LIB = defined($ENV{BZIP2_LIB}) ? $ENV{BZIP2_LIB} : 'bzip2-src';
@@ -22,7 +24,7 @@ WriteMakefile(
     NAME         => 'Compress::Raw::Bzip2',
     VERSION_FROM => 'lib/Compress/Raw/Bzip2.pm',
     INC          => "-I$BZIP2_INCLUDE" ,
-    DEFINE       => "$WALL -DBZ_NO_STDIO" ,
+    DEFINE       => "$WALL -DBZ_NO_STDIO $USE_PPPORT_H" ,
     XS           => { 'Bzip2.xs' => 'Bzip2.c'},
     'clean'      => { FILES      => '*.c bzip2.h bzlib.h bzlib_private.h constants.h constants.xs' },
    #'depend'     => { 'Makefile'   => 'config.in' },
@@ -31,13 +33,6 @@ WriteMakefile(
                       SUFFIX       => 'gz',
                       DIST_DEFAULT => 'MyTrebleCheck tardist',
                     },
-
-    (
-      $ENV{SKIP_FOR_CORE}
-        ? (MAN3PODS    => {})
-        : ()
-    ),
-       
 
     (
       $BUILD_BZIP2
@@ -51,6 +46,8 @@ WriteMakefile(
             AUTHOR       => 'Paul Marquess <pmqs@cpan.org>')
         : ()
     ),
+
+    INSTALLDIRS => ($] > 5.010 ? 'perl' : 'site'),
 
     ((ExtUtils::MakeMaker->VERSION() gt '6.30') ?
         ('LICENSE'  => 'perl')         : ()),    

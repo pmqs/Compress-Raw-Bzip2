@@ -16,8 +16,10 @@
 
 #include "bzlib.h" 
 
-#define NEED_sv_2pv_nolen
-#include "ppport.h" 
+#ifdef USE_PPPORT_H
+#  define NEED_sv_2pv_nolen
+#  include "ppport.h" 
+#endif
 
 #if PERL_REVISION == 5 && (PERL_VERSION < 8 || (PERL_VERSION == 8 && PERL_SUBVERSION < 4 ))
 
@@ -265,6 +267,8 @@ char * string;
             case SVt_PVHV:
             case SVt_PVCV:
                 croak("%s: buffer parameter is not a SCALAR reference", string);
+            default:
+                break;
         }
         if (SvROK(sv))
             croak("%s: buffer parameter is a reference to a reference", string) ;
@@ -302,6 +306,8 @@ char * string ;
             case SVt_PVHV:
             case SVt_PVCV:
                 croak("%s: buffer parameter is not a SCALAR reference", string);
+            default:
+                break;
         }
         if (SvROK(sv))
             croak("%s: buffer parameter is a reference to a reference", string) ;
