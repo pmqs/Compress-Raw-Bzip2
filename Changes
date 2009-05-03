@@ -1,6 +1,13 @@
 CHANGES
 -------
 
+  2.018 3 May 2009
+
+      * added linitOutput option
+
+      * Changes to bzip2 source to get the module to build using a C++
+        compiler
+
   2.017 28 March 2009
 
       * Minor changes to allow building in perl core.

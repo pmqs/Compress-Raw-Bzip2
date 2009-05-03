@@ -9,6 +9,7 @@ private/MakeUtil.pm
 ppport.h
 t/000prereq.t
 t/01bzip2.t
+t/09limitoutput.t
 t/99pod.t
 t/Test/Builder.pm
 t/Test/More.pm
@@ -31,6 +32,7 @@ bzip2-src/unzcrash.c
 bzip2-src/spewG.c
 bzip2-src/mk251.c
 bzip2-src/LICENSE
+bzip2-src/bzip2-cpp.patch
 Changes
 pod/FAQ.pod
 META.yml                                 Module meta-data (added by MakeMaker)
