@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Compress-Raw-Bzip2
-version:            2.024
+version:            2.025
 abstract:           Low-Level Interface to bzip2 compression library
 author:
     - Paul Marquess <pmqs@cpan.org>
