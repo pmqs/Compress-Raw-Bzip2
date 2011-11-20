@@ -29,4 +29,5 @@ bzip2-src/LICENSE
 bzip2-src/bzip2-cpp.patch
 Changes
 pod/FAQ.pod
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
