@@ -16,6 +16,7 @@ t/Test/More.pm
 t/Test/Simple.pm
 t/compress/CompTestUtils.pm
 lib/Compress/Raw/Bzip2.pm
+lib/Compress/Raw/Bzip2/FAQ.pod
 bzip2-src/blocksort.c
 bzip2-src/huffman.c
 bzip2-src/crctable.c
@@ -28,6 +29,5 @@ bzip2-src/bzlib_private.h
 bzip2-src/LICENSE
 bzip2-src/bzip2-cpp.patch
 Changes
-pod/FAQ.pod
 META.yml                                 Module YAML meta-data (added by MakeMaker)
 META.json                                Module JSON meta-data (added by MakeMaker)
