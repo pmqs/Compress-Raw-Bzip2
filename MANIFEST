@@ -16,7 +16,6 @@ t/Test/More.pm
 t/Test/Simple.pm
 t/compress/CompTestUtils.pm
 lib/Compress/Raw/Bzip2.pm
-lib/Compress/Raw/Bzip2/FAQ.pod
 bzip2-src/blocksort.c
 bzip2-src/huffman.c
 bzip2-src/crctable.c
