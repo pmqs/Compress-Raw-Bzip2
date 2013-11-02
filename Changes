@@ -1,6 +1,11 @@
 CHANGES
 -------
 
+  2.063 20 October 2013
+
+      * Compress::Raw::Bzip2 uses AutoLoader for no reason
+        [#88259]
+
   2.062 11 August 2013
 
       * No Changes
