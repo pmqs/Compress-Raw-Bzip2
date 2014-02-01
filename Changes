@@ -1,6 +1,11 @@
 CHANGES
 -------
 
+  2.064 1 February 2014
+
+      * [PATCH] Handle non-PVs better
+        [#91558]
+
   2.063 20 October 2013
 
       * Compress::Raw::Bzip2 uses AutoLoader for no reason

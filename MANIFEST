@@ -10,6 +10,7 @@ ppport.h
 t/000prereq.t
 t/01bzip2.t
 t/09limitoutput.t
+t/19nonpv.t
 t/99pod.t
 t/Test/Builder.pm
 t/Test/More.pm
