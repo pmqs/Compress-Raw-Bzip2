@@ -1,6 +1,15 @@
 CHANGES
 -------
 
+
+  2.069 26 Sept 2015
+
+      * reduce compiler warnings and stderr noise
+        [#101340]
+
+      * consting misc tables
+        [#101296]
+
   2.068 23 Dec 2014
 
       * No Changes
