@@ -2,6 +2,15 @@ CHANGES
 -------
 
 
+  2.070 28 Dec 2016
+
+      * #119005: [PATCH] Wrong APPEND_OUTPUT logic
+
+      * #119141: perl-Compress-Raw-Bzip2-2.069 bug report
+
+      * #100817: gcc 4.9.2 warnings
+        Coped fix for same issue from #105647
+
   2.069 26 Sept 2015
 
       * reduce compiler warnings and stderr noise
@@ -9,6 +18,9 @@ CHANGES
 
       * consting misc tables
         [#101296]
+
+      * (Ab)use of F<...> for urls/email
+        [#111060]
 
   2.068 23 Dec 2014
 
