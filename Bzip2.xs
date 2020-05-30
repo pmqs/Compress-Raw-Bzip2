@@ -494,10 +494,11 @@ bzdeflate (s, buf, output)
          croak("Wide character in " COMPRESS_CLASS "::bzdeflate output parameter");
 #endif
 
-    if((s->flags & FLAG_APPEND_OUTPUT) != FLAG_APPEND_OUTPUT) {
-        SvCUR_set(output, 0);
-        /* sv_setpvn(output, "", 0); */
-    }
+     if((s->flags & FLAG_APPEND_OUTPUT) == FLAG_APPEND_OUTPUT) {
+         SvOOK_off(output);
+     } else {
+         SvCUR_set(output, 0);
+     }
     cur_length =  SvCUR(output) ;
     s->stream.next_out = (char*) SvPVX(output) + cur_length;
     increment =  SvLEN(output) -  cur_length;
@@ -558,10 +559,11 @@ bzclose(s, output)
     if (DO_UTF8(output) && !sv_utf8_downgrade(output, 1))
          croak("Wide character in " COMPRESS_CLASS "::bzclose input parameter");
 #endif
-    if((s->flags & FLAG_APPEND_OUTPUT) != FLAG_APPEND_OUTPUT) {
-        SvCUR_set(output, 0);
-        /* sv_setpvn(output, "", 0); */
-    }
+     if((s->flags & FLAG_APPEND_OUTPUT) == FLAG_APPEND_OUTPUT) {
+         SvOOK_off(output);
+     } else {
+         SvCUR_set(output, 0);
+     }
     cur_length =  SvCUR(output) ;
     s->stream.next_out = (char*) SvPVX(output) + cur_length;
     increment =  SvLEN(output) -  cur_length;
@@ -619,10 +621,11 @@ bzflush(s, output)
     if (DO_UTF8(output) && !sv_utf8_downgrade(output, 1))
          croak("Wide character in " COMPRESS_CLASS "::bzflush input parameter");
 #endif
-    if((s->flags & FLAG_APPEND_OUTPUT) != FLAG_APPEND_OUTPUT) {
-        SvCUR_set(output, 0);
-        /* sv_setpvn(output, "", 0); */
-    }
+     if((s->flags & FLAG_APPEND_OUTPUT) == FLAG_APPEND_OUTPUT) {
+         SvOOK_off(output);
+     } else {
+         SvCUR_set(output, 0);
+     }
     cur_length =  SvCUR(output) ;
     s->stream.next_out = (char*) SvPVX(output) + cur_length;
     increment =  SvLEN(output) -  cur_length;
@@ -745,9 +748,11 @@ bzinflate (s, buf, output)
     if (DO_UTF8(output) && !sv_utf8_downgrade(output, 1))
          croak("Wide character in " UNCOMPRESS_CLASS "::bzinflate output parameter");
 #endif
-    if((s->flags & FLAG_APPEND_OUTPUT) != FLAG_APPEND_OUTPUT) {
-        SvCUR_set(output, 0);
-    }
+     if((s->flags & FLAG_APPEND_OUTPUT) == FLAG_APPEND_OUTPUT) {
+         SvOOK_off(output);
+     } else {
+         SvCUR_set(output, 0);
+     }
 
     /* Assume no output buffer - the code below will update if there is any available */
     s->stream.avail_out = 0;

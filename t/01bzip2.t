@@ -25,13 +25,13 @@ BEGIN
 
     my $count = 0 ;
     if ($] < 5.005) {
-        $count = 103 ;
+        $count = 127 ;
     }
     elsif ($] >= 5.006) {
-        $count = 173 ;
+        $count = 197 ;
     }
     else {
-        $count = 131 ;
+        $count = 155 ;
     }
 
     plan tests => $count + $extra;
@@ -472,6 +472,105 @@ if ($] >= 5.005)
 
 }
 
+
+{
+    title 'RT#132734: test inflate append OOK output parameter';
+    # https://github.com/pmqs/Compress-Raw-Bzip2/issues/2
+
+    my $hello = "I am a HAL 9000 computer" ;
+    my $data = $hello ;
+
+    my($X, $Z);
+
+    ok my $x = new Compress::Raw::Bzip2 ( {-AppendOutput => 1} );
+
+    cmp_ok $x->bzdeflate($data, $X), '==',  BZ_RUN_OK ;
+
+    cmp_ok $x->bzclose($X), '==', BZ_STREAM_END ;
+
+    ok my $k = new Compress::Raw::Bunzip2 ( {-AppendOutput => 1,
+                                             -ConsumeInput => 1} ) ;
+    $Z = 'prev. ' ;
+    substr($Z, 0, 4, ''); # chop off first 4 characters using offset
+    cmp_ok $Z, 'eq', '. ' ;
+
+    # use Devel::Peek ; Dump($Z) ; # shows OOK flag
+
+    # if (1) { # workaround
+    #     my $prev = $Z;
+    #     undef $Z ;
+    #     $Z = $prev ;
+    # }
+
+    cmp_ok $k->bzinflate($X, $Z), '==', BZ_STREAM_END ;
+    # use Devel::Peek ; Dump($Z) ; # No OOK flag
+
+    cmp_ok $Z, 'eq', ". $hello" ;
+}
+
+
+{
+    title 'RT#132734: test deflate append OOK output parameter';
+    # https://github.com/pmqs/Compress-Raw-Bzip2/issues/2
+
+    my $hello = "I am a HAL 9000 computer" ;
+    my $data = $hello ;
+
+    my($X, $Z);
+
+    $X = 'prev. ' ;
+    substr($X, 0, 6, ''); # chop off all characters using offset
+    cmp_ok $X, 'eq', '' ;
+
+    # use Devel::Peek ; Dump($X) ; # shows OOK flag
+
+    # if (1) { # workaround
+    #     my $prev = $Z;
+    #     undef $Z ;
+    #     $Z = $prev ;
+    # }
+
+    ok my $x = new Compress::Raw::Bzip2 ( { -AppendOutput => 1 } );
+
+    cmp_ok $x->bzdeflate($data, $X), '==',  BZ_RUN_OK ;
+
+    cmp_ok $x->bzclose($X), '==', BZ_STREAM_END ;
+
+    ok my $k = new Compress::Raw::Bunzip2 ( {-AppendOutput => 1,
+                                             -ConsumeInput => 1} ) ;
+    cmp_ok $k->bzinflate($X, $Z), '==', BZ_STREAM_END ;
+
+    is $Z, $hello ;
+}
+
+
+{
+    title 'RT#132734: test flush append OOK output parameter';
+    # https://github.com/pmqs/Compress-Raw-Bzip2/issues/2
+
+    my $hello = "I am a HAL 9000 computer" ;
+    my $data = $hello ;
+
+    my($X, $Z);
+
+    my $F = 'prev. ' ;
+    substr($F, 0, 6, ''); # chop off all characters using offset
+    cmp_ok $F, 'eq', '' ;
+
+    # use Devel::Peek ; Dump($F) ; # shows OOK flag
+
+    ok my $x = new Compress::Raw::Bzip2 ( {-AppendOutput => 1 });
+
+    cmp_ok $x->bzdeflate($data, $X), '==',  BZ_RUN_OK ;
+
+    cmp_ok $x->bzclose($F), '==', BZ_STREAM_END ;
+
+    ok my $k = new Compress::Raw::Bunzip2 ( {-AppendOutput => 1,
+                                             -ConsumeInput => 1} ) ;
+    cmp_ok $k->bzinflate($X . $F, $Z), '==', BZ_STREAM_END ;
+
+    is $Z, $hello ;
+}
 
 exit if $] < 5.006 ;
 
