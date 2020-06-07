@@ -17,7 +17,6 @@ task:
   test_script:    
     - make test
 
-
 task:
   name: MacOS
   osx_instance:
