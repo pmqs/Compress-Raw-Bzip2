@@ -7,7 +7,6 @@ task:
       # image: freebsd-13-0-release-amd64
   install_script:
     - pkg info
-    - pkg info -Ix ^db
     - pkg info -Ix ^lzma
     - pkg install -y gcc
     - pkg install -y perl5
