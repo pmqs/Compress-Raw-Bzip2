@@ -27,7 +27,7 @@ jobs:
           - 0
           - 1
   
-    name: Perl ${{ matrix.perl }}
+    name: Perl ${{ matrix.perl }} BUILD_BZIP2=${{ matrix.build-bzip2 }}
     steps:
     - uses: actions/checkout@v1
     - name: Setup perl
