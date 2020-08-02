@@ -2,6 +2,11 @@ name: Windows build
 
 on: [push, pull_request]
 
+env:
+  VCPKG_INSTALLED: /c/vcpkg/installed
+#   ZLIB_LIB: C:\vcpkg\installed\x86-windows\bin
+#   ZLIB_INCLUDE: C:\vcpkg\installed\x86-windows\include
+
 jobs:
   build:
 
@@ -34,8 +39,19 @@ jobs:
       uses: shogo82148/actions-setup-perl@v1
       with:
         perl-version: ${{ matrix.perl }}
+  
+      # Install zlib on windows
+    - name: Install bzip2 (Windows)
+      run: |
+        vcpkg install bzip2 
+              
+    - name: Set Path for bzip2 
+#       run: echo "::add-path::${{ env.ZLIB_LIB }}"   
+      run: echo "::add-path::C:\vcpkg\installed\x86-windows\bin"
+      
     - name: Perl version
       run: perl -V
+      
     - name: Install dependencies
       run: cpanm --quiet --installdeps --notest .
     - name: Build
