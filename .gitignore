@@ -16,6 +16,7 @@
 !.perltidyrc
 !.travis.yml
 
+/Bzip2.bs
 /MYMETA.*
 /Makefile
 /Makefile.old
