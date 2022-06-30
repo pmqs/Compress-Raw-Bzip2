@@ -53,13 +53,8 @@ jobs:
         mkdir build
         cd build
         cmake ..
-        make
-      working-directory: ${{ env.bzip2-source }}
-
-    - name: Install upstream bzip2 '${{matrix.bzip2-version}}''
-      run: |
-        cd build
         make DESTDIR=${{ env.bzip2-install }} install
+        make clean
       working-directory: ${{ env.bzip2-source }}
 
     - name: Setup perl
