@@ -29,7 +29,7 @@ jobs:
         bzip2-version:
           - master
 
-    name: Perl ${{ matrix.perl }} + Upstream Sourceware '${{ matrix.bzip2-version }}'
+    name: Perl ${{ matrix.perl }} + Upstream '${{ matrix.bzip2-version }}'
     steps:
     - uses: actions/checkout@v1
 

@@ -29,7 +29,7 @@ jobs:
         bzip2-version:
           - master
 
-    name: Perl ${{ matrix.perl }} + Upstream Sourceware '${{ matrix.bzip2-version }}'
+    name: Perl ${{ matrix.perl }} + Upstream '${{ matrix.bzip2-version }}'
     steps:
     - uses: actions/checkout@v1
 
@@ -54,7 +54,12 @@ jobs:
         cd build
         cmake ..
         make
-        make DESTDIR=${{ env.bzip2-install }}
+      working-directory: ${{ env.bzip2-source }}
+
+    - name: Install upstream bzip2 '${{matrix.bzip2-version}}''
+      run: |
+        cd build
+        make DESTDIR=${{ env.bzip2-install }} install
       working-directory: ${{ env.bzip2-source }}
 
     - name: Setup perl
@@ -65,8 +70,8 @@ jobs:
     - name: Perl version
       run: perl -V
 
-    - name: Install dependencies
-      run: cpanm --quiet --installdeps --notest .
+    # - name: Install dependencies
+    #   run: cpanm --quiet --installdeps --notest .
 
     - name: Build
       run: perl Makefile.PL && make
