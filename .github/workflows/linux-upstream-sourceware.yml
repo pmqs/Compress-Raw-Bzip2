@@ -37,8 +37,8 @@ jobs:
       run: |
         echo "bzip2-source=${GITHUB_WORKSPACE}/upstream-bzip2-source-${{ matrix.bzip2-version }}" >> $GITHUB_ENV
         echo "bzip2-install=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}"           >> $GITHUB_ENV
-        echo "BZIP2_LIB=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}/lib"           >> $GITHUB_ENV
-        echo "BZIP2_INCLUDE=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}/include"   >> $GITHUB_ENV
+        echo "BZIP2_LIB=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}"               >> $GITHUB_ENV
+        echo "BZIP2_INCLUDE=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}"           >> $GITHUB_ENV
         echo "BZIP2_VERSION=${{ matrix.bzip2-version }}"                                          >> $GITHUB_ENV
         echo "BUILD_BZIP2=0"                                                                      >> $GITHUB_ENV
 
@@ -50,9 +50,11 @@ jobs:
 
     - name: Build upstream bzip2 '${{matrix.bzip2-version}}''
       run: |
-        make
-        make install PREFIX=${{ env.bzip2-install }}
+        make -f Makefile-libbz2_so
+        mkdir -p ${{ env.bzip2-install }}
+        cp bzlib.h libbz.so* ${{ env.bzip2-install }}
         make clean
+        rm libbz.so*
       working-directory: ${{ env.bzip2-source }}
 
     - name: Setup perl
