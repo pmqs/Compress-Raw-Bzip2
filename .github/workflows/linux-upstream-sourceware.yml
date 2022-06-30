@@ -52,9 +52,9 @@ jobs:
       run: |
         make -f Makefile-libbz2_so
         mkdir -p ${{ env.bzip2-install }}
-        cp bzlib.h libbz.so* ${{ env.bzip2-install }}
+        cp bzlib.h libbz2.so* ${{ env.bzip2-install }}
         make clean
-        rm libbz.so*
+        rm libbz2.so*
       working-directory: ${{ env.bzip2-source }}
 
     - name: Setup perl
