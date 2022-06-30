@@ -1,0 +1,75 @@
+name: MacOS + Upstream Bzip2 1.1
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    strategy:
+      matrix:
+        perl:
+          - '5.36'
+          # - '5.34'
+          # - '5.32'
+          # - '5.30'
+          # - '5.28'
+          # - '5.26'
+          # - '5.24'
+          # - '5.22'
+          # - '5.20'
+          # - '5.18'
+          # - '5.16'
+          # - '5.14'
+          # - '5.12'
+          # - '5.10'
+          # - '5.8'
+          # - '5.6'
+        bzip2-version:
+          - master
+
+    name: Perl ${{ matrix.perl }} + Upstream '${{ matrix.bzip2-version }}'
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Set Env
+      run: |
+        echo "bzip2-source=${GITHUB_WORKSPACE}/upstream-bzip2-source-${{ matrix.bzip2-version }}"         >> $GITHUB_ENV
+        echo "bzip2-install=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}"                   >> $GITHUB_ENV
+        echo "BZIP2_LIB=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}/usr/local/lib"         >> $GITHUB_ENV
+        echo "BZIP2_INCLUDE=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}/usr/local/include" >> $GITHUB_ENV
+        echo "BZIP2_VERSION=${{ matrix.bzip2-version }}"                                                  >> $GITHUB_ENV
+        echo "BUILD_BZIP2=0"                                                                              >> $GITHUB_ENV
+
+    - name: Checkout upstream bzip2 '${{matrix.bzip2-version}}''
+      run: |
+        mkdir -p ${{ env.bzip2-source }}
+        cd ${{ env.bzip2-source }}
+        git clone https://gitlab.com/bzip2/bzip2.git .
+
+    - name: Build upstream bzip2 '${{matrix.bzip2-version}}''
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make DESTDIR=${{ env.bzip2-install }} install
+        make clean
+      working-directory: ${{ env.bzip2-source }}
+
+    - name: Setup perl
+      uses: shogo82148/actions-setup-perl@v1
+      with:
+        perl-version: ${{ matrix.perl }}
+
+    - name: Perl version
+      run: perl -V
+
+    # - name: Install dependencies
+    #   run: cpanm --quiet --installdeps --notest .
+
+    - name: Build
+      run: perl Makefile.PL && make
+
+    - name: Test
+      run: make test
