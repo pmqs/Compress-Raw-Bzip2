@@ -52,6 +52,7 @@ jobs:
       run: |
         make
         make install PREFIX=${{ env.bzip2-install }}
+        make clean
       working-directory: ${{ env.bzip2-source }}
 
     - name: Setup perl
