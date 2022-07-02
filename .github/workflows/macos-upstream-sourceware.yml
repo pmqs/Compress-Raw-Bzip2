@@ -55,12 +55,12 @@ jobs:
       run: |
         #wget -c https://gist.githubusercontent.com/obihill/3278c17bcee41c0c8b59a41ada8c0d35/raw/3bf890e2ad40d0af358e153395c228326f0b44d5/Makefile-libbz2_dylib
         #make -f Makefile-libbz2_dylib
-        gcc --shared -Wl,-install_name -Wl,libbz2.dylib -fpic -fPIC -Wall -Winline -O2 -g -D_FILE_OFFSET_BITS=64  blocksort.c huffman.c crctable.c randtable.c compress.c decompress.c bzlib.c  -o libbz2.1.0.8.dylib
-        ln -s libbz2.1.0.8.dylib libbz2.dylib
+        gcc --shared -Wl,-install_name -Wl,libbz2.dylib -fpic -fPIC -Wall -Winline -O2 -g -D_FILE_OFFSET_BITS=64  blocksort.c huffman.c crctable.c randtable.c compress.c decompress.c bzlib.c  -o libbz2.${{ env.BZIP2_VERSION }}.dylib
+        ln -s libbz2.${{ env.BZIP2_VERSION }}.dylib libbz2.dylib
         mkdir -p ${{ env.bzip2-install }}
-        cp bzlib.h libbz2.* ${{ env.bzip2-install }}
+        cp bzlib.h libbz2.${{ env.BZIP2_VERSION }}.dylib libbz2.dylib ${{ env.bzip2-install }}
         # make clean
-        rm libbz2.*
+        rm  libbz2.${{ env.BZIP2_VERSION }}.dylib libbz2.dylib
       working-directory: ${{ env.bzip2-source }}
 
     - name: Setup perl
