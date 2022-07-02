@@ -73,3 +73,6 @@ jobs:
 
     - name: Test
       run: make test
+
+    - name: Bzip2 Version
+      run: perl -Mblib -MCompress::Raw::Bzip2 -e 'print Compress::Raw::Bzip2::bzlibversion(). "\n"'
