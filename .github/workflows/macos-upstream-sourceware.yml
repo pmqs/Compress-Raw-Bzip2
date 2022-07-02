@@ -1,4 +1,4 @@
-name: Linux + Upstream Bzip2 1.0
+name: MacOS + Upstream Bzip2 1.0
 
 on: [push, pull_request]
 
@@ -48,13 +48,15 @@ jobs:
         cd ${{ env.bzip2-source }}
         git clone https://sourceware.org/git/bzip2.git .
 
+    # mac makefile sourced from https://stackoverflow.com/questions/67179779/building-and-installing-bzip2-with-shared-library-dylib-on-macos
     - name: Build upstream bzip2 '${{matrix.bzip2-version}}''
       run: |
-        make -f Makefile-libbz2_so
+        wget -c https://gist.githubusercontent.com/obihill/3278c17bcee41c0c8b59a41ada8c0d35/raw/3bf890e2ad40d0af358e153395c228326f0b44d5/Makefile-libbz2_dylib
+        make -f Makefile-libbz2_dylib
         mkdir -p ${{ env.bzip2-install }}
-        cp bzlib.h libbz2.so* ${{ env.bzip2-install }}
+        cp bzlib.h libbz2.* ${{ env.bzip2-install }}
         make clean
-        rm libbz2.so*
+        rm libbz2.*
       working-directory: ${{ env.bzip2-source }}
 
     - name: Setup perl
