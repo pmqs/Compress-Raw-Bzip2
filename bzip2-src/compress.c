@@ -240,7 +240,8 @@ void sendMTFValues ( EState* s )
 {
    Int32 v, t, i, j, gs, ge, totc, bt, bc, iter;
    Int32 nSelectors, alphaSize, minLen, maxLen, selCtr;
-   Int32 nGroups, nBytes;
+   Int32 nGroups;
+   Int32 nBytes = 0;
 
    /*--
    UChar  len [BZ_N_GROUPS][BZ_MAX_ALPHA_SIZE];
