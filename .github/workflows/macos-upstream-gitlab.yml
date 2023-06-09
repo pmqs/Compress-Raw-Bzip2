@@ -1,6 +1,6 @@
 name: MacOS + Upstream Bzip2 1.1
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
