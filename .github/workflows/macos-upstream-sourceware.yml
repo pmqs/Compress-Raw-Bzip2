@@ -1,6 +1,11 @@
 name: MacOS + Upstream Bzip2 1.0
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+  schedule:
+      - cron: '02 02 * * 6'    # Run every Saturday
 
 jobs:
   build:
@@ -10,7 +15,8 @@ jobs:
     strategy:
       matrix:
         perl:
-          - '5.36'
+          - '5.38'
+          # - '5.36'
           # - '5.34'
           # - '5.32'
           # - '5.30'
