@@ -1,7 +1,7 @@
 
                             Compress-Raw-Bzip2
 
-                              Version 2.205
+                         Version 2.205
 
                                16 July 2023
 
@@ -136,8 +136,7 @@ SUPPORT
 -------
 
 General feedback/questions/bug reports should be sent to
-https://github.com/pmqs/Compress-Raw-Bzip2/issues (preferred) or
-https://rt.cpan.org/Public/Dist/Display.html?Name=Compress-Raw-Bzip2.
+https://github.com/pmqs/Compress-Raw-Bzip2/issues
 
 FEEDBACK
 --------
