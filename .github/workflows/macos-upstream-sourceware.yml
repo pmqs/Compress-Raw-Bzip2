@@ -1,4 +1,4 @@
-name: MacOS + Upstream Bzip2 1.0
+name: MacOS + Upstream Sourceware Bzip2 1.0
 
 on:
   workflow_dispatch:
@@ -43,7 +43,7 @@ jobs:
       BZIP2_VERSION:     1.0.999
       BUILD_BZIP2:       0
 
-    name: Perl ${{ matrix.perl }} + Upstream '${{ matrix.bzip2-version }}'
+    name: Perl ${{ matrix.perl }} + Upstream Sourceware '${{ matrix.bzip2-version }}'
     steps:
     - uses: actions/checkout@v3
 
