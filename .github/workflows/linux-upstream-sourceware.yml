@@ -35,18 +35,26 @@ jobs:
         bzip2-version:
           - master
 
+    env:
+      bzip2-source:      ${{ github.workspace }}/upstream-bzip2-source
+      bzip2-install:     /home/runner/upstream-bzip2-install
+      BZIP2_LIB:         /home/runner/upstream-bzip2-install/lib
+      BZIP2_INCLUDE:     /home/runner/upstream-bzip2-install/include
+      BZIP2_VERSION:     ${{ matrix.bzip2-version }}
+      BUILD_BZIP2:       0
+
     name: Perl ${{ matrix.perl }} + Upstream '${{ matrix.bzip2-version }}'
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set Env
-      run: |
-        echo "bzip2-source=${GITHUB_WORKSPACE}/upstream-bzip2-source-${{ matrix.bzip2-version }}" >> $GITHUB_ENV
-        echo "bzip2-install=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}"           >> $GITHUB_ENV
-        echo "BZIP2_LIB=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}"               >> $GITHUB_ENV
-        echo "BZIP2_INCLUDE=${HOME}/upstream-bzip2-install-${{ matrix.bzip2-version }}"           >> $GITHUB_ENV
-        echo "BZIP2_VERSION=${{ matrix.bzip2-version }}"                                          >> $GITHUB_ENV
-        echo "BUILD_BZIP2=0"                                                                      >> $GITHUB_ENV
+    # - name: Set Env
+    #   run: |
+    #     echo "bzip2-source=${GITHUB_WORKSPACE}/upstream-bzip2-source" >> $GITHUB_ENV
+    #     echo "bzip2-install=${HOME}/upstream-bzip2-install"           >> $GITHUB_ENV
+    #     echo "BZIP2_LIB=${HOME}/upstream-bzip2-install"               >> $GITHUB_ENV
+    #     echo "BZIP2_INCLUDE=${HOME}/upstream-bzip2-install"           >> $GITHUB_ENV
+    #     echo "BZIP2_VERSION=${{ matrix.bzip2-version }}"              >> $GITHUB_ENV
+    #     echo "BUILD_BZIP2=0"                                          >> $GITHUB_ENV
 
     - name: Checkout upstream bzip2 '${{matrix.bzip2-version}}''
       run: |
