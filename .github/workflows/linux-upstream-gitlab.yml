@@ -70,10 +70,8 @@ jobs:
 
     - name: Checkout upstream bzip2 '${{matrix.bzip2-version}}'
       run: |
-        # mkdir -p ${{ env.bzip2-source }}
-        # cd ${{ env.bzip2-source }}
         git clone https://gitlab.com/bzip2/bzip2.git .
-      working-directory: ${{ env.bzip2-install }}
+      working-directory: ${{ env.bzip2-source }}
 
     - name: Build upstream bzip2 '${{matrix.bzip2-version}}''
       run: |
