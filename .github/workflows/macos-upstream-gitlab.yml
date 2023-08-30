@@ -37,9 +37,9 @@ jobs:
 
     env:
       bzip2-source:      ${{ github.workspace }}/upstream-bzip2-source
-      bzip2-install:     /home/runner/upstream-bzip2-install
-      BZIP2_LIB:         /home/runner/upstream-bzip2-install/lib
-      BZIP2_INCLUDE:     /home/runner/upstream-bzip2-install/include
+      bzip2-install:     ${{ github.workspace }}/upstream-bzip2-install
+      BZIP2_LIB:         ${{ github.workspace }}/upstream-bzip2-install/lib
+      BZIP2_INCLUDE:     ${{ github.workspace }}/upstream-bzip2-install/include
       BZIP2_VERSION:     ${{ matrix.bzip2-version }}
       BUILD_BZIP2:       0
 
@@ -90,3 +90,6 @@ jobs:
 
     - name: Test
       run: make test
+
+    - name: Bzip2 Version
+      run: perl -Mblib -MCompress::Raw::Bzip2 -e 'print Compress::Raw::Bzip2::bzlibversion(). "\n"'
