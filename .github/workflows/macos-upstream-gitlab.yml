@@ -72,8 +72,8 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ..
-        make DESTDIR=${{ env.bzip2-install }} install
+        cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.bzip2-install }}
+        make install
         make clean
       working-directory: ${{ env.bzip2-source }}
 
