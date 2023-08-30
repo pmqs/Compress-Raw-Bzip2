@@ -60,20 +60,22 @@ jobs:
       run: |
         mkdir -p ${{ env.bzip2-source }}
         mkdir -p ${{ env.bzip2-install }}
+        mkdir -p ${{ env.bzip2-install }}/lib
+        mkdir -p ${{ env.bzip2-install }}/include
         mkdir -p ${{ github.workspace }}/repo
 
     - name: Checkout upstream bzip2 '${{matrix.bzip2-version}}''
       run: |
         git clone https://sourceware.org/git/bzip2.git .
         sed -i -e s'/BZ_VERSION  "1.0.8.*"/BZ_VERSION "${{ env.BZIP2_VERSION }}"/' bzlib_private.h
-        echo BZ_VERSION
         grep BZ_VERSION  bzlib_private.h
       working-directory: ${{ env.bzip2-source }}
 
     - name: Build upstream bzip2 '${{matrix.bzip2-version}}''
       run: |
         make -f Makefile-libbz2_so
-        cp bzlib.h libbz2.so* ${{ env.bzip2-install }}
+        cp bzlib.h ${{ env.bzip2-install }}/include
+        cp libbz2.so* ${{ env.bzip2-install }}/lib
         make clean
         rm libbz2.so*
       working-directory: ${{ env.bzip2-source }}
