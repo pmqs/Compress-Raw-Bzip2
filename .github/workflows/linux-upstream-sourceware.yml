@@ -99,7 +99,7 @@ jobs:
           my $expected = "${{ env.BZIP2_VERSION }}";
           my $got = Compress::Raw::Bzip2::bzlibversion() ;
           print "Expected: $expected\n" ;
-          print "Got:      $got"\n";
+          print "Got:      $got\n";
           die "Unexpected Bzip2 version\n"
             if $expected ne $got;
           '
