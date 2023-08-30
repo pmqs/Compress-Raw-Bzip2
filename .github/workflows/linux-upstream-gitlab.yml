@@ -42,7 +42,7 @@ jobs:
       bzip2-install:     ${{ github.workspace }}/upstream-bzip2-install
       BZIP2_LIB:         ${{ github.workspace }}/upstream-bzip2-install/lib
       BZIP2_INCLUDE:     ${{ github.workspace }}/upstream-bzip2-install/include
-      BZIP2_VERSION:     ${{ matrix.dummy-version }}
+      BZIP2_VERSION:     ${{ matrix.branch-name }}
       BUILD_BZIP2:       0
 
     defaults:

@@ -36,6 +36,7 @@ jobs:
           - master
         bzip2-version:
           - '1.1.0'
+          
 
     env:
       bzip2-source:      ${{ github.workspace }}/upstream-bzip2-source
