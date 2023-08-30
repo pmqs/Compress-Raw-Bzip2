@@ -66,6 +66,8 @@ jobs:
       run: |
         git clone https://sourceware.org/git/bzip2.git .
         sed -i -e s'/BZ_VERSION  "1.0.8.*"/BZ_VERSION "${{ env.BZIP2_VERSION }}"/' bzlib_private.h
+        echo BZ_VERSION
+        grep BZ_VERSION  bzlib_private.h
       working-directory: ${{ env.bzip2-source }}
 
     # mac makefile sourced from https://stackoverflow.com/questions/67179779/building-and-installing-bzip2-with-shared-library-dylib-on-macos
@@ -80,6 +82,11 @@ jobs:
         # make clean
         rm  libbz2.${{ env.BZIP2_VERSION }}.dylib libbz2.dylib
       working-directory: ${{ env.bzip2-source }}
+
+    - name: Show Installed Bzip2 files in ${{ env.bzip2-install }}
+      run: |
+        find .
+      working-directory: ${{ env.bzip2-install }}
 
     - name: Setup perl
       uses: shogo82148/actions-setup-perl@v1
