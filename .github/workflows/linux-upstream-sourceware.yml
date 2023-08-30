@@ -96,9 +96,10 @@ jobs:
     - name: Check Bzip2 Version
       run: |
         perl -Mblib -MCompress::Raw::Bzip2 -e '
-          my $v = Compress::Raw::Bzip2::bzlibversion() ;
-          print "Expected: ${{ env.BZIP2_VERSION }}\n"
-          print "Got:      " . Compress::Raw::Bzip2::bzlibversion(). "\n"
+          my $expected = "${{ env.BZIP2_VERSION }}";
+          my $got = Compress::Raw::Bzip2::bzlibversion() ;
+          print "Expected: $expected\n" ;
+          print "Got:      $got"\n";
           die "Unexpected Bzip2 version\n"
-            if $v ne "${{ env.BZIP2_VERSION }}";
+            if $expected ne $got;
           '
