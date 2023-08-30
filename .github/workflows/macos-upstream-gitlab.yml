@@ -36,14 +36,14 @@ jobs:
           - master
         bzip2-version:
           - '1.1.0'
-          
+
 
     env:
       bzip2-source:      ${{ github.workspace }}/upstream-bzip2-source
       bzip2-install:     ${{ github.workspace }}/upstream-bzip2-install
       BZIP2_LIB:         ${{ github.workspace }}/upstream-bzip2-install/lib
       BZIP2_INCLUDE:     ${{ github.workspace }}/upstream-bzip2-install/include
-      BZIP2_VERSION:     ${{ matrix.branch-name }}
+      BZIP2_VERSION:     ${{ matrix.bzip2-version }}
       BUILD_BZIP2:       0
 
     defaults:
