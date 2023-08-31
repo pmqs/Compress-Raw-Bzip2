@@ -1,11 +1,12 @@
 name: MacOS + Upstream Sourceware Bzip2 1.0
 
+# Disabled - not working
 on:
   workflow_dispatch:
-  push:
-  pull_request:
-  schedule:
-      - cron: '02 02 * * 6'    # Run every Saturday
+  # push:
+  # pull_request:
+  # schedule:
+  #     - cron: '02 02 * * 6'    # Run every Saturday
 
 jobs:
   build:
@@ -79,8 +80,6 @@ jobs:
         ln -s libbz2.${{ env.BZIP2_VERSION }}.dylib libbz2.dylib
         cp bzlib.h ${{ env.bzip2-install }}/include
         cp libbz2.${{ env.BZIP2_VERSION }}.dylib libbz2.dylib ${{ env.bzip2-install }}/lib
-        # make clean
-        rm  libbz2.${{ env.BZIP2_VERSION }}.dylib libbz2.dylib
       working-directory: ${{ env.bzip2-source }}
 
     - name: Show Installed Bzip2 files in ${{ env.bzip2-install }}
