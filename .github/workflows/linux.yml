@@ -50,7 +50,7 @@ jobs:
     - name: Build
       run: perl Makefile.PL && make
       env:
-        BUILD_ZLIB: ${{matrix.build-bzip2}}
+        BUILD_BZIP2: ${{matrix.build-bzip2}}
 
     - name: Test
       run: make test
