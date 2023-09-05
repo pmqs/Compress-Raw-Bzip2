@@ -44,7 +44,8 @@ jobs:
           core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
     - name: Install dependencies via vcpkg
-      run: vcpkg install bzip2 --binarysource="clear;x-gha,readwrite"
+      if: ${{ matrix.build-bzip2 }} == 0
+      run: vcpkg install bzip2::x64-windows --binarysource="clear;x-gha,readwrite"
 
     # - name: Build & Install bzip2 library
     #   if: ${{ matrix.build-bzip2 }} == 0
@@ -52,7 +53,7 @@ jobs:
 
     - name: Show installed bzip2 files
       # if: ${{ matrix.build-bzip2 }} == 0
-      run: find C:\vcpkg\installed
+      run: find /c/vcpkg/installed
 
     - name: Setup perl
       uses: shogo82148/actions-setup-perl@v1
