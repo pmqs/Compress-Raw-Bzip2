@@ -29,7 +29,7 @@ jobs:
           # - '5.6'
         build-bzip2:
           - 0
-          # - 1
+          - 1
 
     name: Perl ${{ matrix.perl }} BUILD_BZIP2:${{ matrix.build-bzip2 }}
     steps:
