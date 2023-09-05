@@ -43,16 +43,12 @@ jobs:
           core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
           core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
-    - name: Install dependencies via vcpkg
+    - name: Get bzip2 library from vcpkg
       if: ${{ matrix.build-bzip2 }} == 0
       run: vcpkg install bzip2:x64-windows --binarysource="clear;x-gha,readwrite"
 
-    # - name: Build & Install bzip2 library
-    #   if: ${{ matrix.build-bzip2 }} == 0
-    #   run: vcpkg install bzip2:x64-windows
-
-    - name: Show installed bzip2 files
-      # if: ${{ matrix.build-bzip2 }} == 0
+    - name: Show installed bzip2 files created by vcpkg
+      if: ${{ matrix.build-bzip2 }} == 0
       run: find /c/vcpkg/installed
       shell: bash
 
@@ -67,7 +63,14 @@ jobs:
     - name: Install dependencies
       run: cpanm --quiet --installdeps --notest .
 
-    - name: Build
+    - name: Build with included Bzip2 source
+      if: ${{ matrix.build-bzip2 }} == 1
+      run: perl Makefile.PL && make
+      env:
+        BUILD_BZIP2: ${{ matrix.build-bzip2 }}
+
+    - name: Build with system bzip2
+      if: ${{ matrix.build-bzip2 }} == 0
       run: perl Makefile.PL && make
       env:
         BUILD_BZIP2: ${{ matrix.build-bzip2 }}
