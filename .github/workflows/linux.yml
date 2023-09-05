@@ -27,19 +27,30 @@ jobs:
           - '5.10'
           - '5.8'
           - '5.6'
+        build-bzip2:
+          - 0
+          - 1
 
-    name: Perl ${{ matrix.perl }}
+    name: Perl ${{ matrix.perl }} BUILD_BZIP2:${{matrix.build-bzip2}}
     steps:
+
     - uses: actions/checkout@v3
+
     - name: Setup perl
       uses: shogo82148/actions-setup-perl@v1
       with:
         perl-version: ${{ matrix.perl }}
+
     - name: Perl version
       run: perl -V
+
     - name: Install dependencies
       run: cpanm --quiet --installdeps --notest .
+
     - name: Build
       run: perl Makefile.PL && make
+      env:
+        BUILD_ZLIB: ${{matrix.build-bzip2}}
+
     - name: Test
       run: make test
