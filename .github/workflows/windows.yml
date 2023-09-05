@@ -54,6 +54,7 @@ jobs:
     - name: Show installed bzip2 files
       # if: ${{ matrix.build-bzip2 }} == 0
       run: find /c/vcpkg/installed
+      shell: bash
 
     - name: Setup perl
       uses: shogo82148/actions-setup-perl@v1
