@@ -29,16 +29,30 @@ jobs:
           # - '5.6'
         build-bzip2:
           - 0
-          - 1
+          # - 1
 
-    name: Perl ${{ matrix.perl }} BUILD_BZIP2:${{matrix.build-bzip2}}
+    name: Perl ${{ matrix.perl }} BUILD_BZIP2:${{ matrix.build-bzip2 }}
     steps:
 
     - uses: actions/checkout@v3
 
-    - name: Install bzip2
-      if: ${{matrix.build-bzip2}} == 0
-      run: vcpkg install bzip2:x64-windows
+    # from https://learn.microsoft.com/en-gb/vcpkg/users/binarycaching#gha
+    - uses: actions/github-script@v6
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+
+    - name: Install dependencies via vcpkg
+      run: vcpkg install bzip2 --binarysource="clear;x-gha,readwrite"
+
+    # - name: Build & Install bzip2 library
+    #   if: ${{ matrix.build-bzip2 }} == 0
+    #   run: vcpkg install bzip2:x64-windows
+
+    - name: Show installed bzip2 files
+      # if: ${{ matrix.build-bzip2 }} == 0
+      run: find C:\vcpkg\installed
 
     - name: Setup perl
       uses: shogo82148/actions-setup-perl@v1
@@ -54,7 +68,7 @@ jobs:
     - name: Build
       run: perl Makefile.PL && make
       env:
-        BUILD_BZIP2: ${{matrix.build-bzip2}}
+        BUILD_BZIP2: ${{ matrix.build-bzip2 }}
         BZIP2_INCLUDE: C:\vcpkg\installed\x64-windows\include
         BZIP2_LIB: C:\vcpkg\installed\x64-windows\lib
 
