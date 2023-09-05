@@ -45,7 +45,7 @@ jobs:
 
     - name: Install dependencies via vcpkg
       if: ${{ matrix.build-bzip2 }} == 0
-      run: vcpkg install bzip2::x64-windows --binarysource="clear;x-gha,readwrite"
+      run: vcpkg install bzip2:x64-windows --binarysource="clear;x-gha,readwrite"
 
     # - name: Build & Install bzip2 library
     #   if: ${{ matrix.build-bzip2 }} == 0
