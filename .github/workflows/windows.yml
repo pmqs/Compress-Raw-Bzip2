@@ -58,6 +58,9 @@ jobs:
       run: find /c/vcpkg/installed
       shell: bash
 
+    - name: Show path
+      run: path
+
     - name: Setup perl
       uses: shogo82148/actions-setup-perl@v1
       with:
