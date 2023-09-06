@@ -32,12 +32,14 @@ jobs:
           # - '5.6'
         build-bzip2:
           - 0
-          # - 1
+          - 1
 
     name: Perl ${{ matrix.perl }} BUILD_BZIP2:${{ matrix.build-bzip2 }}
     steps:
 
     - uses: actions/checkout@v3
+
+    # Windows runner doesn't have bzip2 installed, so get it from vcpkg
 
     # next two steps derived from https://learn.microsoft.com/en-gb/vcpkg/users/binarycaching#gha
     - uses: actions/github-script@v6
@@ -48,8 +50,7 @@ jobs:
 
     - name: Get bzip2 library from vcpkg
       if: ${{ matrix.build-bzip2 }} == 0
-      # run: vcpkg install bzip2:x64-windows --binarysource="clear;x-gha,readwrite"
-      run: vcpkg install bzip2 --binarysource="clear;x-gha,readwrite"
+      run: vcpkg install bzip2:x64-windows --binarysource="clear;x-gha,readwrite"
 
     - name: Show installed bzip2 files created by vcpkg
       if: ${{ matrix.build-bzip2 }} == 0
