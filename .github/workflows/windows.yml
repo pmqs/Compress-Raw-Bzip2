@@ -68,6 +68,8 @@ jobs:
       run: perl Makefile.PL && make
       env:
         BUILD_BZIP2: ${{ matrix.build-bzip2 }}
+        BZIP2_INCLUDE: ${GITHUB_WORKSPACE}\bzip2-src
+        BZIP2_LIB: bzip2-src
 
     - name: Build with system bzip2
       if: ${{ matrix.build-bzip2 }} == 0
