@@ -59,7 +59,9 @@ jobs:
       shell: bash
 
     - name: Show path
-      run: $Env:Path
+      run: |
+        $Env:Path
+        dir env:
 
     - name: Setup perl
       uses: shogo82148/actions-setup-perl@v1
