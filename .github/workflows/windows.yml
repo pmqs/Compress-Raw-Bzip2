@@ -14,13 +14,14 @@ jobs:
       matrix:
         perl:
           - '5.38'
-          - '5.36'
-          - '5.34'
-          - '5.32'
-          - '5.30'
-          - '5.28'
-          - '5.26'
-          - '5.24'
+          # - '5.36'
+          # - '5.34'
+          # - '5.32'
+          # - '5.30'
+          # - '5.28'
+          # - '5.26'
+          # - '5.24'
+
           # - '5.22'
           # - '5.20'
           # - '5.18'
@@ -49,11 +50,11 @@ jobs:
           core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
     - name: Get bzip2 library from vcpkg
-      if: ${{ matrix.build-bzip2 }} == '0'
+      if: matrix.build-bzip2 == 0
       run: vcpkg install bzip2:x64-windows --binarysource="clear;x-gha,readwrite"
 
     - name: Show installed bzip2 files created by vcpkg
-      if: ${{ matrix.build-bzip2 }} == '0'
+      if: matrix.build-bzip2 == 0
       run: find /c/vcpkg/installed
       shell: bash
 
@@ -69,7 +70,7 @@ jobs:
       run: cpanm --quiet --installdeps --notest .
 
     - name: Build with included Bzip2 source
-      if: ${{ matrix.build-bzip2 }} == '1'
+      if: matrix.build-bzip2 == 1
       run: perl Makefile.PL && make
       env:
         BUILD_BZIP2: ${{ matrix.build-bzip2 }}
@@ -77,7 +78,7 @@ jobs:
         BZIP2_LIB: bzip2-src
 
     - name: Build with system bzip2
-      if: ${{ matrix.build-bzip2 }} == '0'
+      if: matrix.build-bzip2 == 0
       run: perl Makefile.PL && make
       env:
         BUILD_BZIP2: ${{ matrix.build-bzip2 }}
