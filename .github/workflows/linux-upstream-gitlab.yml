@@ -2,10 +2,10 @@ name: Linux + Upstream GitLab Bzip2 1.1
 
 on:
   workflow_dispatch:
-  # push:
-  # pull_request:
-  # schedule:
-  #     - cron: '02 02 * * 6'    # Run every Saturday
+  push:
+  pull_request:
+  schedule:
+      - cron: '02 02 * * 6'    # Run every Saturday
 
 jobs:
   build:
