@@ -65,7 +65,7 @@ jobs:
 
     - name: Checkout upstream bzip2 '${{matrix.branch-name}}'
       run: |
-        git clone https://gitlab.com/bzip2/bzip2.git .
+        git clone --depth 1 https://gitlab.com/bzip2/bzip2.git .
       working-directory: ${{ env.bzip2-source }}
 
     - name: Build upstream bzip2 '${{matrix.branch-name}}''
@@ -73,7 +73,7 @@ jobs:
         mkdir build
         cd build
         cmake .. -DCMAKE_INSTALL_PREFIX=${{ env.bzip2-install }}
-        make install
+        make install VERBOSE=1
         make clean
       working-directory: ${{ env.bzip2-source }}
 
