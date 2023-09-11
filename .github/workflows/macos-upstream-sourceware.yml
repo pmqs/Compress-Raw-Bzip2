@@ -99,7 +99,17 @@ jobs:
       run: cpanm --quiet --installdeps --notest .
 
     - name: Build
-      run: perl Makefile.PL && make
+      run: |
+        perl Makefile.PL && make
+
+    - name: Show blib
+      run: |
+        find .
+
+    - name: install_name_tool
+      run: |
+        install_name_tool -change libbz2.dylib ${{ env.bzip2-install }}/lib/libbz2.dylib ./blib/arch/auto/Compress/Raw/Bzip2/Bzip2.bundle
+
 
     - name: Test
       run: make test
