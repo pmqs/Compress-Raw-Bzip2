@@ -13,11 +13,12 @@
 
 
 
-# Compress::Raw::Bzip2 - Low-Level Perl Interface to the bzip2 compression library
+# Compress::Raw::Bzip2 - Perl Interface to the bzip2 library
 
 
 `Compress::Raw::Bzip2` provides a Perl interface to the in-memory
-compression/uncompression functions from the bzip2 compression library.
+compression/uncompression functions from the [bzip2](https://sourceware.org/bzip2/)
+compression library.
 
 For installation instructions see [README](../README).
 
