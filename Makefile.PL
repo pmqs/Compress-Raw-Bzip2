@@ -29,7 +29,7 @@ WriteMakefile(
     DEFINE       => "$WALL -DBZ_NO_STDIO $USE_PPPORT_H" ,
     XS           => { 'Bzip2.xs' => 'Bzip2.c'},
     'clean'      => { FILES      => '*.c bzip2.h bzlib.h bzlib_private.h constants.h constants.xs' },
-    #'depend'     => { 'Makefile'   => 'config.in' },
+    'depend'     => { 'manifypods' => 'READMEmd' },
     'dist'       => { COMPRESS     => 'gzip',
                       TARFLAGS     => '-chvf',
                       SUFFIX       => 'gz',

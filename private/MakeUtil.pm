@@ -68,23 +68,20 @@ MyTrebleCheck:
 
 ';
 
-    # pod2markdown only supported from Perl 5.8
-    if (-e '.github' && $] >= 5.008)
+    if (-e '.github')
     {
         $postamble .= <<EOM;
 
-READMEmd: .github/README.md
+READMEmd: .github/Bzip2.pod
 
-.github/README.md: $params{VERSION_FROM} .github/badges
-	\@echo Creating .github/README.md from $params{VERSION_FROM}
-	\$(NOECHO) \$(RM_F) .github/README.md
-	\$(NOECHO) \$(TOUCH) .github/README.md
-	\$(NOECHO) \$(CP_NONEMPTY) .github/badges .github/README.md \$(PERM_RW)
-	\$(NOECHO) pod2markdown $params{VERSION_FROM} >>.github/README.md
+.github/Bzip2.pod: lib/Compress/Raw/Bzip2.pm
+	\@echo Creating .github/Bzip2.pod from Bzip2.pm
+	\$(NOECHO) perl -e 'while(<>){ next if 1 .. /^__END__/; print}' lib/Compress/Raw/Bzip2.pm >.github/Bzip2.pod
 
 EOM
     }
-    else {
+    else
+    {
         $postamble .= <<EOM;
 
 READMEmd:
