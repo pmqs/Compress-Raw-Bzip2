@@ -52,7 +52,7 @@ jobs:
     name: Perl ${{ matrix.perl }} + Upstream Sourceware '${{ matrix.bzip2-version }}'
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         path: repo
 

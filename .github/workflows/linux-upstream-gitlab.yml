@@ -52,7 +52,7 @@ jobs:
     name: Perl ${{ matrix.perl }} + Upstream Gitlab '${{ matrix.branch-name }}'
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         path: repo
 
