@@ -16,12 +16,20 @@
 # Compress::Raw::Bzip2 - Perl Interface to the bzip2 library
 
 
-`Compress::Raw::Bzip2` provides a Perl interface to the in-memory
+This module provides a Perl interface to the in-memory
 compression/uncompression functions from the [bzip2](https://sourceware.org/bzip2/)
 compression library.
 
-For installation instructions see [README](../README).
+For details of building and installing this module see the file [README](../README)
 
 API Documentation is in [Bzip2.pod](Bzip2.pod).
 
-The CPAN location for this module is [here](https://metacpan.org/pod/Compress::Raw::Bzip2)
+This module is also available on [metacpan](https://metacpan.org/) at [Compress::Raw::Bzip2](https://metacpan.org/pod/Compress::Raw::Bzip2)
+
+General feedback/questions/bug reports should be reported in the [issues](https://github.com/pmqs/Compress-Raw-Bzip2/issues) page.
+
+
+Copyright (c) 2009-2024 Paul Marquess. All rights reserved.
+
+This program is free software; you can redistribute it
+and/or modify it under the same terms as Perl itself.
