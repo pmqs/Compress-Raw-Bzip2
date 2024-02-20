@@ -184,7 +184,8 @@ sub getBoolean
 {
     my $name = shift ;
 
-    return 0
+    # default is TRUE
+    return 1
         if ! defined $ENV{$name};
 
     return ($ENV{$name} =~ /^yes|on|true|1$/i) ? 1 : 0;
