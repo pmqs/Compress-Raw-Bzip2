@@ -1,6 +1,16 @@
 CHANGES
 -------
 
+  2.209 20 February 2024
+
+    * version 2.209
+      Tue Feb 20 13:14:56 2024 +0000
+      3682e4e48c316dcc6c004578e099377190d0b23b
+
+    * #14 BUILD_BZIP2 default should be true
+      Tue Feb 20 13:12:22 2024 +0000
+      07b8b9549c15eaffd304d6ae1ace4644bc049969
+
   2.208 19 February 2024
 
     * fix for READMEmd target
