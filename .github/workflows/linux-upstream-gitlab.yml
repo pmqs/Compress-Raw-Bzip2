@@ -71,10 +71,10 @@ jobs:
     #     mkdir -p ${{ env.bzip2-install }}/include
     #     mkdir -p ${{ github.workspace }}/repo
 
-    - name: Checkout upstream bzip2 '${{matrix.branch-name}}'
-      run: |
-        git clone --depth 1 https://gitlab.com/bzip2/bzip2.git .
-      working-directory: ${{ env.bzip2-source }}
+    # - name: Checkout upstream bzip2 '${{matrix.branch-name}}'
+    #   run: |
+    #     git clone --depth 1 https://gitlab.com/bzip2/bzip2.git .
+    #   working-directory: ${{ env.bzip2-source }}
 
     - name: Build upstream bzip2 '${{matrix.branch-name}}''
       run: |
