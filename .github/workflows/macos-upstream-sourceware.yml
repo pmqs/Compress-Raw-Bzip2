@@ -57,8 +57,8 @@ jobs:
     - name: Checkout upstream bzip2 '${{matrix.upstream-bzip2-branch}}'
       uses: actions/checkout@v4
       with:
-        repository: bzip2/bzip2
-        ref: ${{ upstream-bzip2-branch }}
+        repository: https://sourceware.org/git/bzip2.git
+        ref: ${{ matrix.upstream-bzip2-branch }}
         path: ${{ env.bzip2-source }}
 
     - uses: actions/checkout@v4
