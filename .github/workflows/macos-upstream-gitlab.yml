@@ -33,9 +33,9 @@ jobs:
           # - '5.10'
           # - '5.8'
           # - '5.6'
-        branch-name:
+        upstream-branch-name:
           - master
-        bzip2-version:
+        upstream-bzip2-version:
           - '1.1.0'
 
 
@@ -44,20 +44,21 @@ jobs:
       bzip2-install:     ${{ github.workspace }}/upstream-bzip2-install
       BZIP2_LIB:         ${{ github.workspace }}/upstream-bzip2-install/lib
       BZIP2_INCLUDE:     ${{ github.workspace }}/upstream-bzip2-install/include
-      BZIP2_VERSION:     ${{ matrix.bzip2-version }}
+      BZIP2_VERSION:     ${{ matrix.upstream-bzip2-version }}
       BUILD_BZIP2:       0
 
     defaults:
       run:
         working-directory: repo
 
-    name: Perl ${{ matrix.perl }} + Upstream GitLab '${{ matrix.branch-name }}'
+    name: Perl ${{ matrix.perl }} + Upstream GitLab '${{ matrix.upstream-branch-name }}'
     steps:
 
-    - name: Checkout upstream bzip2 '${{matrix.branch-name}}'
+    - name: Checkout upstream bzip2 '${{matrix.upstream-branch-name}}'
       uses: actions/checkout@v4
       with:
-        ref: bzip2/bzip2
+        repository: bzip2/bzip2
+        ref: ${{ matrix.upstream-branch-name }}
         path: ${{ env.bzip2-source }}
 
     - uses: actions/checkout@v4
@@ -70,12 +71,12 @@ jobs:
 #         mkdir -p ${{ env.bzip2-install }}
 #         mkdir -p ${{ github.workspace }}/repo
 #
-#     - name: Checkout upstream bzip2 '${{matrix.branch-name}}'
+#     - name: Checkout upstream bzip2 '${{matrix.upstream-branch-name}}'
 #       run: |
 #         git clone --depth 1 https://gitlab.com/bzip2/bzip2.git .
 #       working-directory: ${{ env.bzip2-source }}
 
-    - name: Build upstream bzip2 '${{matrix.branch-name}}''
+    - name: Build upstream bzip2 '${{matrix.upstream-branch-name}}''
       run: |
         mkdir build
         cd build

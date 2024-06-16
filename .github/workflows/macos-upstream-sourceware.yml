@@ -34,9 +34,9 @@ jobs:
           # - '5.10'
           # - '5.8'
           # - '5.6'
-        bzip2-version:
+        upstream-bzip2-branch:
           - master
-        dummy-version:
+        upstream-dummy-version:
           - '1.0.999'
 
     env:
@@ -44,20 +44,21 @@ jobs:
       bzip2-install:     ${{ github.workspace }}/upstream-bzip2-install
       BZIP2_LIB:         ${{ github.workspace }}/upstream-bzip2-install/lib
       BZIP2_INCLUDE:     ${{ github.workspace }}/upstream-bzip2-install/include
-      BZIP2_VERSION:     ${{ matrix.dummy-version }}
+      BZIP2_VERSION:     ${{ matrix.upstream-dummy-version }}
       BUILD_BZIP2:       0
 
     defaults:
       run:
         working-directory: repo
 
-    name: Perl ${{ matrix.perl }} + Upstream Sourceware '${{ matrix.bzip2-version }}'
+    name: Perl ${{ matrix.perl }} + Upstream Sourceware '${{ matrix.upstream-bzip2-branch }}'
     steps:
 
-    - name: Checkout upstream bzip2 '${{matrix.bzip2-version}}'
+    - name: Checkout upstream bzip2 '${{matrix.upstream-bzip2-branch}}'
       uses: actions/checkout@v4
       with:
-        ref: bzip2/bzip2
+        repository: bzip2/bzip2
+        ref: ${{ upstream-bzip2-branch }}
         path: ${{ env.bzip2-source }}
 
     - uses: actions/checkout@v4
@@ -72,14 +73,14 @@ jobs:
 #         mkdir -p ${{ env.bzip2-install }}/include
 #         mkdir -p ${{ github.workspace }}/repo
 #
-#     - name: Checkout upstream bzip2 '${{matrix.bzip2-version}}'
+#     - name: Checkout upstream bzip2 '${{matrix.upstream-bzip2-branch}}'
 #       run: |
 #         git clone --depth 1 https://sourceware.org/git/bzip2.git .
 #         sed -i -e s'/BZ_VERSION  "1.0.8.*"/BZ_VERSION "${{ env.BZIP2_VERSION }}"/' bzlib_private.h
 #       working-directory: ${{ env.bzip2-source }}
 
     # mac makefile sourced from https://stackoverflow.com/questions/67179779/building-and-installing-bzip2-with-shared-library-dylib-on-macos
-    - name: Build upstream bzip2 '${{matrix.bzip2-version}}''
+    - name: Build upstream bzip2 '${{matrix.upstream-bzip2-branch}}''
       run: |
         #wget -c https://gist.githubusercontent.com/obihill/3278c17bcee41c0c8b59a41ada8c0d35/raw/3bf890e2ad40d0af358e153395c228326f0b44d5/Makefile-libbz2_dylib
         #make -f Makefile-libbz2_dylib
