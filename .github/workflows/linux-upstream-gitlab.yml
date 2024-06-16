@@ -53,17 +53,23 @@ jobs:
     name: Perl ${{ matrix.perl }} + Upstream Gitlab '${{ matrix.branch-name }}'
     steps:
 
+    - name: Checkout upstream bzip2 '${{matrix.branch-name}}'
+      uses: actions/checkout@v4
+      with:
+        ref: bzip2/bzip2
+        path: ${{ env.bzip2-source }}
+
     - uses: actions/checkout@v4
       with:
         path: repo
 
-    - name: Make Paths
-      run: |
-        mkdir -p ${{ env.bzip2-source }}
-        mkdir -p ${{ env.bzip2-install }}
-        mkdir -p ${{ env.bzip2-install }}/lib
-        mkdir -p ${{ env.bzip2-install }}/include
-        mkdir -p ${{ github.workspace }}/repo
+    # - name: Make Paths
+    #   run: |
+    #     mkdir -p ${{ env.bzip2-source }}
+    #     mkdir -p ${{ env.bzip2-install }}
+    #     mkdir -p ${{ env.bzip2-install }}/lib
+    #     mkdir -p ${{ env.bzip2-install }}/include
+    #     mkdir -p ${{ github.workspace }}/repo
 
     - name: Checkout upstream bzip2 '${{matrix.branch-name}}'
       run: |

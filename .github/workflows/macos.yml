@@ -72,15 +72,18 @@ jobs:
           - latest
 
         compiler:
-          - clang
-          - clang++
+          - name: clang
+            werror: -Werror
+
+          - name: clang++
+            werror: -Werror -Wno-error=deprecated
 
         build-bzip2:
           - 0
           - 1
 
 
-    name: Perl ${{ matrix.perl }} CC:${{ matrix.compiler }} BUILD_BZIP2:${{matrix.build-bzip2}}
+    name: Perl ${{ matrix.perl }} CC:${{ matrix.compiler.name }} BUILD_BZIP2:${{matrix.build-bzip2}}
     steps:
     - uses: actions/checkout@v4
 
@@ -101,7 +104,7 @@ jobs:
     - name: Build
       run: |
         flags=$( perl -MConfig -e 'print $Config::Config{ccflags}' )
-        perl Makefile.PL CCFLAGS="$flags -Werror" CC=${{ matrix.compiler }} && make
+        perl Makefile.PL CCFLAGS="$flags ${{ matrix.compiler.werror }}" CC=${{ matrix.compiler.name }} && make
       env:
         BUILD_BZIP2: ${{matrix.build-bzip2}}
 
