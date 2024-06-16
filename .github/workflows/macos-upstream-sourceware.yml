@@ -16,7 +16,8 @@ jobs:
     strategy:
       matrix:
         perl:
-          - '5.38'
+          - '5.40'
+          # - '5.38'
           # - '5.36'
           # - '5.34'
           # - '5.32'
@@ -100,7 +101,8 @@ jobs:
 
     - name: Build
       run: |
-        perl Makefile.PL && make
+        flags=$( perl -MConfig -e 'print $Config::Config{ccflags}' )
+        perl Makefile.PL CCFLAGS="$flags -Werror" && make
 
     - name: Show blib
       run: |
