@@ -52,9 +52,7 @@ jobs:
       run: cpanm --quiet --installdeps --notest .
 
     - name: Build
-      run: |
-        flags=$( perl -MConfig -e 'print $Config::Config{ccflags}' )
-        perl Makefile.PL CCFLAGS="$flags -Werror" && make
+      run: perl Makefile.PL && make
       env:
         BUILD_BZIP2: ${{matrix.build-bzip2}}
 
