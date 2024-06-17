@@ -31,11 +31,16 @@ jobs:
           - '5.10'
           - '5.8'
           - '5.6'
+
+        ccflags:
+          - -Werror
+          - -Werror -Wc++-compat
+
         build-bzip2:
           - 0
           - 1
 
-    name: Perl ${{ matrix.perl }} BUILD_BZIP2:${{matrix.build-bzip2}}
+    name: Perl ${{ matrix.perl }} BUILD_BZIP2:${{matrix.build-bzip2}} CCFLAGS:${{matrix.ccflags}}
     steps:
 
     - uses: actions/checkout@v4
@@ -54,7 +59,7 @@ jobs:
     - name: Build
       run: |
         flags=$( perl -MConfig -e 'print $Config::Config{ccflags}' )
-        perl Makefile.PL CCFLAGS="$flags -Werror" && make
+        perl Makefile.PL CCFLAGS="$flags ${{matrix.ccflags}}" && make
       env:
         BUILD_BZIP2: ${{matrix.build-bzip2}}
 
@@ -72,15 +77,18 @@ jobs:
           - latest
 
         compiler:
-          - gcc
-          - g++
+          - name: gcc
+            ccflags: -Werror
+
+          - name: g++
+            ccflags: -Werror -xc++
 
         build-bzip2:
           - 0
           - 1
 
 
-    name: Perl ${{ matrix.perl }} CC:${{ matrix.compiler }} BUILD_BZIP2:${{matrix.build-bzip2}}
+    name: Perl ${{ matrix.perl }} CC:${{ matrix.compiler.name }} BUILD_BZIP2:${{matrix.build-bzip2}}
     steps:
     - uses: actions/checkout@v4
 
@@ -101,9 +109,9 @@ jobs:
     - name: Build
       run: |
         flags=$( perl -MConfig -e 'print $Config::Config{ccflags}' )
-        perl Makefile.PL CCFLAGS="$flags -Werror" CC=${{ matrix.compiler }} && make
+        perl Makefile.PL CCFLAGS="$flags ${{ matrix.compiler.ccflags }}" CC=${{ matrix.compiler.name }} && make
       env:
         BUILD_BZIP2: ${{matrix.build-bzip2}}
-        
+
     - name: Test
       run: make test

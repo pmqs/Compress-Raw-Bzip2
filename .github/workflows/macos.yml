@@ -71,10 +71,10 @@ jobs:
 
         compiler:
           - name: clang
-            werror: -Werror
+            ccflags: -Werror
 
           - name: clang++
-            werror: -Werror -Wno-error=deprecated
+            ccflags: -Werror -xc++
 
         build-bzip2:
           - 0
@@ -102,7 +102,7 @@ jobs:
     - name: Build
       run: |
         flags=$( perl -MConfig -e 'print $Config::Config{ccflags}' )
-        perl Makefile.PL CCFLAGS="$flags ${{ matrix.compiler.werror }}" CC=${{ matrix.compiler.name }} && make
+        perl Makefile.PL CCFLAGS="$flags ${{ matrix.compiler.ccflags }}" CC=${{ matrix.compiler.name }} && make
       env:
         BUILD_BZIP2: ${{matrix.build-bzip2}}
 
