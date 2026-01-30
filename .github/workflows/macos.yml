@@ -39,7 +39,7 @@ jobs:
     name: Perl ${{ matrix.perl }} BUILD_BZIP2:${{matrix.build-bzip2}}
     steps:
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Setup perl
       uses: shogo82148/actions-setup-perl@v1
@@ -84,7 +84,7 @@ jobs:
 
     name: Perl ${{ matrix.perl }} CC:${{ matrix.compiler.name }} BUILD_BZIP2:${{matrix.build-bzip2}}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Setup perl
       uses: shogo82148/actions-setup-perl@v1
