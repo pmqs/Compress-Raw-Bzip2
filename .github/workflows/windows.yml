@@ -43,7 +43,7 @@ jobs:
     # Windows runner doesn't have bzip2 installed, so get it from vcpkg
 
     # next two steps derived from https://learn.microsoft.com/en-gb/vcpkg/users/binarycaching#gha
-    - uses: actions/github-script@v6
+    - uses: actions/github-script@v8
       with:
         script: |
           core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
