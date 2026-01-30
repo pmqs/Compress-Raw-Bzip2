@@ -38,7 +38,7 @@ jobs:
     name: Perl ${{ matrix.perl }} BUILD_BZIP2:${{ matrix.build-bzip2 }}
     steps:
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     # Windows runner doesn't have bzip2 installed, so get it from vcpkg
 

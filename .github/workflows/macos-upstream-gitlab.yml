@@ -56,13 +56,13 @@ jobs:
     steps:
 
     # - name: Checkout upstream bzip2 '${{matrix.upstream-branch-name}}'
-    #   uses: actions/checkout@v4
+    #   uses: actions/checkout@v6
     #   with:
     #     repository: https://gitlab.com/bzip2/bzip2.git
     #     ref: ${{ matrix.upstream-branch-name }}
     #     path: ${{ env.bzip2-source }}
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         path: repo
 
