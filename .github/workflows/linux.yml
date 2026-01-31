@@ -107,6 +107,9 @@ jobs:
         uses: shogo82148/actions-setup-perl@v1
         with:
           perl-version: ${{ matrix.perl }}
+      - name: Install libbz2-dev
+        if: matrix.build-bzip2 == 0
+        run: sudo apt-get install -y libbz2-dev
       - name: Perl version
         run: perl -V
       - name: Install dependencies
