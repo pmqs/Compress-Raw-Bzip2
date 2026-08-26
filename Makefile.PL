@@ -1,7 +1,7 @@
 #! perl -w
 
 use strict ;
-require 5.006 ;
+require 5.008 ;
 
 use lib '.';
 use private::MakeUtil;
@@ -43,12 +43,8 @@ WriteMakefile(
         : (LIBS => [ "-L$BZIP2_LIB -lbz2 " ])
     ),
 
-    (
-      $] >= 5.005
-        ? (ABSTRACT_FROM => 'lib/Compress/Raw/Bzip2.pm',
-            AUTHOR       => 'Paul Marquess <pmqs@cpan.org>')
-        : ()
-    ),
+    ABSTRACT_FROM => 'lib/Compress/Raw/Bzip2.pm',
+    AUTHOR       => 'Paul Marquess <pmqs@cpan.org>',
 
     INSTALLDIRS => ($] > 5.010  && $] < 5.011 ? 'perl' : 'site'),
 

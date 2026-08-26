@@ -36,7 +36,7 @@ installed on your system:
 
     * A C compiler
 
-    * Perl 5.006 or better.
+    * Perl 5.008 or better.
 
 BUILDING THE MODULE
 -------------------
