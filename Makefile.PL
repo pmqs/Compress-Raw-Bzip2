@@ -19,9 +19,6 @@ my $BZIP2_INCLUDE = defined($ENV{BZIP2_INCLUDE}) ? $ENV{BZIP2_INCLUDE} : '.';
 
 #ParseCONFIG() ;
 
-UpDowngrade(getPerlFiles('MANIFEST'))
-    unless $ENV{PERL_CORE};
-
 WriteMakefile(
     NAME         => 'Compress::Raw::Bzip2',
     VERSION_FROM => 'lib/Compress/Raw/Bzip2.pm',
