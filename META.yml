@@ -1,7 +1,7 @@
 ---
 abstract: 'Low-Level Interface to bzip2 compression library'
 author:
-  - 'Paul Marquess <pmqs@cpan.org>'
+  - 'Paul Marquess <pmqs@outlook.com>'
 build_requires:
   ExtUtils::MakeMaker: '0'
 configure_requires:
